@@ -10,6 +10,7 @@ import type {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
+import Postcode from "../../../commons/hooks/address/address.index";
 
 interface IBoardWriteProps {
   isEdit: boolean;
@@ -38,6 +39,11 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [boardAddress, setUserAddress] = useState({
+    address: "",
+    zipcode: "",
+    addressDetail: "",
+  });
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>): void => {
     setWriter(e.target.value);
@@ -52,6 +58,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setContents(e.target.value);
   };
 
+  // const boardAddress = JSON.stringify({ ...userAddress });
   const onClickSubmit = async (): Promise<void> => {
     try {
       const result = await createBoard({
@@ -61,11 +68,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             password,
             title,
             contents,
+            boardAddress,
           },
         },
         refetchQueries: [{ query: FETCH_BOARDS }],
       });
-
+      console.log(result);
       void router.push(`/freeBoard/${result?.data?.createBoard._id}`);
     } catch (err) {
       if (err instanceof Error) {
@@ -91,7 +99,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       warning("비밀번호를 입력해주세요.");
       return;
     }
-    console.log("HI");
     if (title !== "") {
       updateBoardInput.title = title;
     }
@@ -120,7 +127,6 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
         <S.PageTitle>
           {props.isEdit ? "게시글 수정" : "게시글 등록"}
         </S.PageTitle>
-
         <S.UserWrapper>
           <div>
             <S.Title>작성자</S.Title>
@@ -151,17 +157,10 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
             defaultValue={props.data?.fetchBoard?.contents}
           ></S.TextArea>
         </S.InnerWrapper>
-        <S.InnerWrapper>
-          <S.Title>주소</S.Title>
-          <S.flexWrap_H>
-            <S.ZipCode placeholder="22531" />
-            <S.ZipCodeBtn>우편번호 검색</S.ZipCodeBtn>
-          </S.flexWrap_H>
-          <S.Margin_B_10 />
-          <S.Input />
-          <S.Margin_B_10 />
-          <S.Input type="text" placeholder="상세주소를 입력해주세요." />
-        </S.InnerWrapper>
+        <Postcode
+          userAddress={boardAddress}
+          setAddress={setUserAddress}
+        ></Postcode>
         <S.InnerWrapper>
           <S.Title>유튜브</S.Title>
           <S.Input type="text" placeholder="링크를 복사해주세요." />
@@ -180,6 +179,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
         <S.BtnWrapper>
           <S.WriteBtn onClick={props.isEdit ? onClickUpdate : onClickSubmit}>
             {props.isEdit ? "수정하기" : "등록하기"}
+          </S.WriteBtn>
+          <S.WriteBtn
+            onClick={() => {
+              console.log("d");
+            }}
+          >
+            click
           </S.WriteBtn>
         </S.BtnWrapper>
       </S.Wrapper>

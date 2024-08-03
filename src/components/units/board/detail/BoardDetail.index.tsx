@@ -104,14 +104,24 @@ export default function BoardDetail(): JSX.Element {
               <S.Writer>{data?.fetchBoard?.writer}</S.Writer>
               <S.Date>{getDate(String(data?.fetchBoard?.createdAt))}</S.Date>
             </div>
-            <S.IconBox>
-              <S.Icon>
-                <img src="/icons/ic_link-24px.svg" />
-              </S.Icon>
-              <S.Icon>
-                <img src="/icons/ic_location_on-24px.svg" />
-              </S.Icon>
-            </S.IconBox>
+            <S.IconWrapper>
+              <S.IconBox title="">
+                <S.Icon>
+                  <img src="/icons/ic_link-24px.svg" />
+                </S.Icon>
+              </S.IconBox>
+              <S.IconBox
+                title={
+                  data?.fetchBoard?.boardAddress != null
+                    ? `${data?.fetchBoard?.boardAddress.address} ${data?.fetchBoard?.boardAddress.addressDetail}`
+                    : ""
+                }
+              >
+                <S.Icon>
+                  <img src="/icons/ic_location_on-24px.svg" />
+                </S.Icon>
+              </S.IconBox>
+            </S.IconWrapper>
           </S.userWrapper>
         </S.Header>
         <S.Main>

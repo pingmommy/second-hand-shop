@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
-
+import { Tooltip } from "antd";
 export const Wrapper = styled.section`
   width: 70%;
   margin: 50px auto;
   font-family: "NanumGothicCoding-Regular", sans-serif;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   padding: 80px 170px;
   border-radius: 5px;
@@ -46,12 +47,14 @@ export const Date = styled.div`
   font-size: 13px;
 `;
 
-export const IconBox = styled.div`
+export const IconWrapper = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
   display: flex;
 `;
+
+export const IconBox = styled(Tooltip)``;
 
 export const Icon = styled.div`
   padding: 0 10px;
