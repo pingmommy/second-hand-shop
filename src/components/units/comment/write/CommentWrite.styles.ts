@@ -1,23 +1,23 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  border-top: 2px solid var(--color-grey-300);
   width: 70%;
   margin: 0 auto;
   font-family: "NanumGothicCoding-Regular", sans-serif;
-  padding: 50px 10px 0 10px;
+  padding: 50px 10px 30px 10px;
 
   color: var(--color-grey-700);
 `;
 
 export const Header = styled.header`
+  border-top: 2px solid var(--color-grey-300);
   width: 100%;
-  padding-bottom: 10px;
-`;
-export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding-bottom: 30px;
+  padding: 40px 0 30px 0;
+`;
+export const TitleWrapper = styled.div`
+  padding-bottom: 10px;
 `;
 
 export const Title = styled.div`

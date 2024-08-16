@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import { Tooltip } from "antd";
+import { Tooltip, Modal } from "antd";
+
+export const DeletionModal = styled(Modal)``;
+
 export const Wrapper = styled.section`
   width: 70%;
   margin: 50px auto;
@@ -63,7 +66,7 @@ export const Icon = styled.div`
 `;
 
 export const Main = styled.main`
-  padding: 50px 0;
+  padding-top: 50px;
 `;
 
 export const ImgBox = styled.div`
@@ -81,6 +84,7 @@ export const Image = styled.img`
 export const Footer = styled.footer`
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 `;
 
 export const UpCount = styled.div`

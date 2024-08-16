@@ -1,103 +1,77 @@
-import type { ChangeEvent } from "react";
-import { useState } from "react";
 import * as S from "./CommentWrite.styles";
-import { useMutation } from "@apollo/client";
-import {
-  CREATE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "./CommentWrite.queries";
-import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import type { IMutationCreateBoardCommentArgs } from "../../../../commons/types/generated/types";
 import type {
-  IMutation,
-  IMutationCreateBoardCommentArgs,
-} from "../../../../commons/types/generated/types";
+  ExtendedFormData,
+  ICommentWriteProps,
+} from "./CommentWrite.queries";
+import { useCreateBoardComment } from "../../../commons/hooks/customs/useCreateBoardComment";
+import { useUpdateBoardComment } from "../../../commons/hooks/customs/useUpdateBoardComment";
 
-export default function CommentWrite(): JSX.Element {
-  const router = useRouter();
-
-  const [createBoardComment] = useMutation<
-    Pick<IMutation, "createBoardComment">,
+export default function CommentWrite({
+  id,
+  isEditing,
+  editingData,
+  onEditToggle,
+}: ICommentWriteProps): JSX.Element {
+  const { register, handleSubmit, reset } = useForm<
+    ExtendedFormData,
     IMutationCreateBoardCommentArgs
-  >(CREATE_BOARD_COMMENT);
+  >();
+  const { onClickSubmit } = useCreateBoardComment();
+  const { onClickUpdate } = useUpdateBoardComment();
 
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [contents, setContents] = useState("");
-
-  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setContents(e.target.value);
-  };
-
-  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>): void => {
-    setWriter(e.target.value);
-  };
-
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(e.target.value);
-  };
-
-  const onClickSubmit = async (): Promise<void> => {
-    if (typeof router.query.boardId !== "string") return;
-    await createBoardComment({
-      variables: {
-        createBoardCommentInput: {
-          writer,
-          password,
-          contents,
-          rating: 0.5,
-        },
-        boardId: router.query.boardId,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_BOARD_COMMENTS,
-          variables: { boardId: router.query.boardId },
-        },
-      ],
-    });
-
-    setWriter("");
-    setPassword("");
-    setContents("");
+  const HandlingSubmit = (data: ExtendedFormData): void => {
+    if (isEditing) {
+      void onClickUpdate(id, editingData?._id, data);
+      if (onEditToggle != null) {
+        onEditToggle();
+      }
+    } else {
+      void onClickSubmit(id, data);
+      reset();
+    }
   };
 
   return (
     <>
       <S.Wrapper>
-        <S.Header>
-          <S.TitleWrapper>
+        {!isEditing && (
+          <S.Header>
             <S.IconImg src="/icons/rate_review-24px.svg" />
             <S.Title>댓글</S.Title>
-          </S.TitleWrapper>
-          <div>
+          </S.Header>
+        )}
+        <form onSubmit={handleSubmit(HandlingSubmit)}>
+          <S.TitleWrapper>
             <S.Input
               type="text"
               placeholder="작성자"
-              onChange={onChangeWriter}
-              value={writer}
+              {...register("createBoardComment.writer")}
+              defaultValue={editingData?.writer ?? ""}
+              readOnly={editingData?.writer !== undefined}
             />
             <S.Input
               type="password"
               placeholder="비밀번호"
-              onChange={onChangePassword}
-              value={password}
+              {...register("password")}
             />
-          </div>
-        </S.Header>
-        <S.Body>
-          <div>
-            <S.Contents
-              maxLength={100}
-              placeholder="개인정보가 어쩌구저쩌구..."
-              onChange={onChangeContents}
-              value={contents}
-            ></S.Contents>
-            <S.BtnWrapper>
-              <S.TextCount>{`${contents.length}/100`}</S.TextCount>
-              <S.Button onClick={onClickSubmit}>등록하기</S.Button>
-            </S.BtnWrapper>
-          </div>
-        </S.Body>
+          </S.TitleWrapper>
+          <S.Body>
+            <div>
+              <S.Contents
+                maxLength={100}
+                placeholder="개인정보가 어쩌구저쩌구..."
+                {...register("createBoardComment.contents")}
+                defaultValue={editingData?.contents}
+              ></S.Contents>
+              <S.BtnWrapper>
+                <S.TextCount>{`100/100`}</S.TextCount>
+                <S.Button>{isEditing ? "수정하기" : "등록하기"}</S.Button>
+              </S.BtnWrapper>
+            </div>
+          </S.Body>
+        </form>
       </S.Wrapper>
     </>
   );

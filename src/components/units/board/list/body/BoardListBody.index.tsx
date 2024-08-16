@@ -1,27 +1,10 @@
 import Link from "next/link";
 import { getDate } from "../../../../../commons/libraries/getDate";
 import * as S from "./BoardListBody.style";
-import { gql, useQuery } from "@apollo/client";
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../../../commons/types/generated/types";
-const FETCH_BOARDS = gql`
-  query {
-    fetchBoards {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
+import { useQueryFetchBoards } from "../../../../commons/hooks/queries/useQueryFetchBoards";
 
 export default function BoarListBody(): JSX.Element {
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
+  const { data } = useQueryFetchBoards();
 
   return (
     <>
