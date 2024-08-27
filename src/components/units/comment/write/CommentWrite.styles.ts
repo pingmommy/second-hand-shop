@@ -71,9 +71,12 @@ export const Button = styled.button`
   background-color: var(--color-grey-700);
   color: white;
   padding: 5px 10px;
+  cursor: pointer;
 `;
 
 export const TextCount = styled.div`
   padding-left: 10px;
   color: var(--color-grey-300);
 `;
+
+//

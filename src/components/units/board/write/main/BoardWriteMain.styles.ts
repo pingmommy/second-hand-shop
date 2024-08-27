@@ -35,3 +35,9 @@ export const TextArea = styled.textarea`
   border-radius: 3px;
   padding: 10px;
 `;
+
+export const Error = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  padding-top: 0.3rem;
+`;

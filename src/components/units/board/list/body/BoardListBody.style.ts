@@ -8,33 +8,6 @@ export const Wrapper = styled.section`
   color: var(--color-grey-700);
 `;
 
-export const SearchWrapper = styled.div`
-  /* border: 1px solid red; */
-  display: flex;
-  align-items: center;
-`;
-
-export const SearchBar = styled.input`
-  width: 50%;
-  height: 40px;
-  background-color: #f2f3f6;
-  border-radius: 5px;
-  border: none;
-  margin-right: 10px;
-  font-size: 16px;
-  padding-left: 20px;
-`;
-
-export const SearchBtn = styled.button`
-  width: 80px;
-  height: 40px;
-  border: 2px solid var(--color-grey-500);
-  color: var(--color-grey-700);
-  border-radius: 5px;
-  background-color: transparent;
-  font-size: 14px;
-`;
-
 export const TableWrapper = styled.div`
   margin: 20px 0;
   border-top: 3px solid var(--color-grey-500);
@@ -70,4 +43,8 @@ export const T_Colum_title = styled.a`
   :hover {
     text-decoration: underline;
   }
+`;
+
+export const Keyword = styled.span`
+  color: red;
 `;

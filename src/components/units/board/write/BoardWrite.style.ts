@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.form`
+export const Form = styled.form`
   width: 70%;
   margin: 50px auto;
   font-family: "NanumGothicCoding-Regular", sans-serif;

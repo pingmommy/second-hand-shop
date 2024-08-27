@@ -21,6 +21,10 @@ export default function BoardDetailMainBottom(): JSX.Element {
     setIsModalOpen(!isModalOpen);
   };
 
+  const onClickMoveToEdit = (): void => {
+    void router.push(`/freeBoard/${id}/edit`);
+  };
+
   return (
     <>
       <S.DeletionModal
@@ -31,12 +35,11 @@ export default function BoardDetailMainBottom(): JSX.Element {
         <p>정말로 삭제하시겠어요?</p>
       </S.DeletionModal>
       <S.BtnWrapper>
-        <Link href="/freeBoard">
+        <Link href={`/freeBoard`}>
           <S.Button>목록으로</S.Button>
         </Link>
-        <Link href={`/freeBoard/${id}/edit`}>
-          <S.Button>수정하기</S.Button>
-        </Link>
+
+        <S.Button onClick={onClickMoveToEdit}>수정하기</S.Button>
 
         <S.Button onClick={handleModal}>삭제하기</S.Button>
       </S.BtnWrapper>

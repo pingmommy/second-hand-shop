@@ -6,8 +6,8 @@ import type {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_BOARDS = gql`
-  query {
-    fetchBoards {
+  query fetchBoards($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
       _id
       writer
       title

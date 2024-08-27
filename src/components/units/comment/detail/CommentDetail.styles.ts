@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
 
 export const Wrapper = styled.div`
   border-bottom: 2px solid var(--color-grey-300);
@@ -13,6 +14,17 @@ export const Wrapper = styled.div`
   display: flex;
 `;
 
+export const DeleteModal = styled(Modal)`
+  font: inherit;
+  color: var(--color-grey-700);
+`;
+
+export const DeletePassword = styled.input`
+  margin: 0.5rem 0;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.2rem;
+`;
 export const Avatar = styled.div`
   width: 5%;
   /* border: 1px solid red; */

@@ -8,8 +8,10 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.h1`
-  padding-bottom: 15px;
-  padding-left: 10px;
+  padding-bottom: 2rem;
+  padding-left: 0.7rem;
+  margin-top: 2rem;
+  line-height: 2rem;
 `;
 
 export const userWrapper = styled.div`

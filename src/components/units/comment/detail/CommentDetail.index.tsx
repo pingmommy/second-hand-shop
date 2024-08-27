@@ -4,7 +4,6 @@ import * as S from "./CommentDetail.styles";
 import CommentWrite from "../../../units/comment/write/CommentWrite.index";
 import { getDate } from "../../../../commons/libraries/getDate";
 import type { IBoardComment } from "../../../../commons/types/generated/types";
-import { Modal } from "antd";
 import { useDeleteBoardComment } from "../../../commons/hooks/customs/useDeleteBoardComment";
 interface ICommentDetailProps {
   data: IBoardComment;
@@ -48,14 +47,15 @@ export default function CommentDetail({
       ) : (
         <S.Wrapper key={data._id}>
           {isModalOpen && (
-            <Modal
-              title="삭제를 원하시면 비밀번호를 입력하세요!"
+            <S.DeleteModal
               open={isModalOpen}
               onOk={onClickDeleteBoardComment}
               onCancel={handleModalToggle}
+              width={350}
             >
-              <input type="password" onChange={onChangePassword} />
-            </Modal>
+              <p>삭제를 원하시면 비밀번호를 입력해주세요!</p>
+              <S.DeletePassword type="password" onChange={onChangePassword} />
+            </S.DeleteModal>
           )}
           <S.Avatar>
             <img src="/icons/avatar.png" />

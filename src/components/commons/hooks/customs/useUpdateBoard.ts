@@ -7,6 +7,8 @@ interface IUseUpdateBoardReturn {
   onClickUpdate: (
     updateBoardInput: IUpdateBoardInput,
     password: string
+    // data: any,
+    // dirtyFields: any
   ) => Promise<void>;
 }
 
@@ -54,6 +56,7 @@ export const useUpdateBoard = (): IUseUpdateBoardReturn => {
     } catch (err) {
       if (err instanceof Error) console.log(err.message);
     }
+    console.log(updateBoardInput);
   };
   return { onClickUpdate };
 };

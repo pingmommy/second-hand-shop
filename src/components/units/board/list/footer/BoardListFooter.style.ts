@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-
-export const Wrapper = styled.footer`
+import { EditOutlined } from "@ant-design/icons";
+export const Footer = styled.footer`
   width: 80%;
   margin: 0 auto;
   display: flex;
@@ -11,20 +11,24 @@ export const Wrapper = styled.footer`
 `;
 
 export const WriteBtn = styled.button`
-  width: 100px;
-  height: 40px;
+  font: inherit;
+  width: 9rem;
+  height: 2.5rem;
   background-color: transparent;
   border-radius: 5px;
   border: 2px solid var(--color-grey-500);
+  cursor: pointer;
+
+  :hover {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+  }
 `;
 
-export const page = styled.span`
-  font-weight: 700;
-  padding: 0 10px;
+export const WriteText = styled.span`
+  /* font-weight: 600; */
 `;
 
-export const Pagination = styled.div`
-  text-align: center;
-  width: 100%;
-  line-height: 40px;
+export const WriteIcon = styled(EditOutlined)`
+  color: var(--color-grey-700);
 `;

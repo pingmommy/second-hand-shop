@@ -6,8 +6,8 @@ import type { IPostcodeProps } from "./address.types";
 
 export default function Postcode(props: IPostcodeProps): JSX.Element {
   const [userAddress, setUserAddress] = useState({
-    address: props.data?.fetchBoard?.boardAddress.address ?? "",
-    zipcode: props.data?.fetchBoard?.boardAddress.zipcode ?? "",
+    address: props.data?.fetchBoard?.boardAddress?.address ?? "",
+    zipcode: props.data?.fetchBoard?.boardAddress?.zipcode ?? "",
   });
 
   const open = useDaumPostcodePopup();

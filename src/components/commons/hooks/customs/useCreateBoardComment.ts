@@ -1,10 +1,9 @@
 import type { ICreateBoardCommentInput } from "../../../../commons/types/generated/types";
-import type { ExtendedFormData } from "../../../units/comment/write/CommentWrite.queries";
 import { useMutationCreateBoardComment } from "../mutations/useMutationCreateBoardComment";
 import { FETCH_BOARD_COMMENTS } from "../queries/useQueryFetchBoardComments";
 
 interface IUseCreateBoardCommentReturn {
-  onClickSubmit: (id: string, data: ExtendedFormData) => Promise<void>;
+  onClickSubmit: (id: string, data: ICreateBoardCommentInput) => Promise<void>;
 }
 
 export const useCreateBoardComment = (): IUseCreateBoardCommentReturn => {
@@ -12,18 +11,13 @@ export const useCreateBoardComment = (): IUseCreateBoardCommentReturn => {
 
   const onClickSubmit = async (
     id: string,
-    data: ExtendedFormData
+    data: ICreateBoardCommentInput
   ): Promise<void> => {
-    const createBoardData: ICreateBoardCommentInput = {
-      ...data.createBoardComment,
-      rating: 0,
-      password: data.password,
-    };
     try {
       await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            ...createBoardData,
+            ...data,
           },
           boardId: id,
         },

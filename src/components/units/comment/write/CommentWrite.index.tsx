@@ -1,12 +1,13 @@
 import * as S from "./CommentWrite.styles";
 import { useForm } from "react-hook-form";
-import type { IMutationCreateBoardCommentArgs } from "../../../../commons/types/generated/types";
-import type {
-  ExtendedFormData,
-  ICommentWriteProps,
-} from "./CommentWrite.queries";
+import type { ICreateBoardCommentInput } from "../../../../commons/types/generated/types";
+import { schema } from "./CommentWrite.types";
+import type { ICommentWriteProps } from "./CommentWrite.types";
 import { useCreateBoardComment } from "../../../commons/hooks/customs/useCreateBoardComment";
 import { useUpdateBoardComment } from "../../../commons/hooks/customs/useUpdateBoardComment";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import type { ChangeEvent } from "react";
 
 export default function CommentWrite({
   id,
@@ -14,14 +15,20 @@ export default function CommentWrite({
   editingData,
   onEditToggle,
 }: ICommentWriteProps): JSX.Element {
-  const { register, handleSubmit, reset } = useForm<
-    ExtendedFormData,
-    IMutationCreateBoardCommentArgs
-  >();
+  const [contentsLength, setContentsLength] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = useForm<ICreateBoardCommentInput>({
+    resolver: yupResolver(schema),
+  });
   const { onClickSubmit } = useCreateBoardComment();
   const { onClickUpdate } = useUpdateBoardComment();
 
-  const HandlingSubmit = (data: ExtendedFormData): void => {
+  const HandlingSubmit = (data: ICreateBoardCommentInput): void => {
     if (isEditing) {
       void onClickUpdate(id, editingData?._id, data);
       if (onEditToggle != null) {
@@ -31,6 +38,10 @@ export default function CommentWrite({
       void onClickSubmit(id, data);
       reset();
     }
+  };
+
+  const checkLength = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setContentsLength(event.currentTarget.value.length);
   };
 
   return (
@@ -47,9 +58,9 @@ export default function CommentWrite({
             <S.Input
               type="text"
               placeholder="작성자"
-              {...register("createBoardComment.writer")}
+              {...register("writer")}
               defaultValue={editingData?.writer ?? ""}
-              readOnly={editingData?.writer !== undefined}
+              readOnly={isEditing}
             />
             <S.Input
               type="password"
@@ -62,12 +73,15 @@ export default function CommentWrite({
               <S.Contents
                 maxLength={100}
                 placeholder="개인정보가 어쩌구저쩌구..."
-                {...register("createBoardComment.contents")}
+                {...register("contents")}
+                onChange={checkLength}
                 defaultValue={editingData?.contents}
               ></S.Contents>
               <S.BtnWrapper>
-                <S.TextCount>{`100/100`}</S.TextCount>
-                <S.Button>{isEditing ? "수정하기" : "등록하기"}</S.Button>
+                <S.TextCount>{`${contentsLength}/100`}</S.TextCount>
+                <S.Button disabled={!isValid}>
+                  {isEditing ? "수정하기" : "등록하기"}
+                </S.Button>
               </S.BtnWrapper>
             </div>
           </S.Body>
