@@ -5,20 +5,25 @@ export default function LayoutHeader(): JSX.Element {
   return (
     <>
       <S.Wrapper>
-        <Link href="/freeBoard">
-          <S.Logo>SecondHand</S.Logo>
-        </Link>
-        <S.FlexBox_H>
+        <S.InnerWrapper>
           <Link href="/freeBoard">
-            <S.Link>자유게시판</S.Link>
+            <S.Logo>SecondHand</S.Logo>
+          </Link>
+          <Link href="/freeBoard">
+            <S.NavLink>자유게시판</S.NavLink>
           </Link>
           <Link href={""}>
-            <S.Link>중고마켓</S.Link>
+            <S.NavLink>중고마켓</S.NavLink>
+          </Link>
+        </S.InnerWrapper>
+        <S.InnerWrapper>
+          <Link href={""}>
+            <S.NavLink>로그인</S.NavLink>
           </Link>
           <Link href={""}>
-            <S.Link>마이페이지</S.Link>
+            <S.SignInLink>회원가입</S.SignInLink>
           </Link>
-        </S.FlexBox_H>
+        </S.InnerWrapper>
       </S.Wrapper>
     </>
   );

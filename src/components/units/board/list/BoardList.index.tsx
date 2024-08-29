@@ -33,7 +33,9 @@ export default function BoardList(): JSX.Element {
   return (
     <>
       <BoarListHeader></BoarListHeader>
+
       <Search refetch={refetch} setKeyword={setKeyword} />
+
       <BoardListBody data={data} keyword={keyword}></BoardListBody>
       <S.Footer>
         <Pagination refetch={refetch} lastPage={lastPage} />

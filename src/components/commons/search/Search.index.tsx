@@ -1,4 +1,9 @@
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import * as S from "./Search.styles";
 import _ from "lodash";
 import type {
@@ -6,6 +11,7 @@ import type {
   IQueryFetchBoardsArgs,
 } from "../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
+import MyDatePicker from "../../units/board/list/datePicker";
 
 interface IProps {
   refetch: (
@@ -15,6 +21,8 @@ interface IProps {
 }
 
 export default function Search({ refetch, setKeyword }: IProps): JSX.Element {
+  const [date, setDate] = useState(["", ""]);
+
   const debouncingKeyword = _.debounce((value) => {
     void refetch({ search: value, page: 1 });
   }, 500);
@@ -24,6 +32,9 @@ export default function Search({ refetch, setKeyword }: IProps): JSX.Element {
     debouncingKeyword(event.target.value);
   };
 
+  const onClickSearchingDate = (): void => {
+    void refetch({ startDate: date[0], endDate: date[1], page: 1 });
+  };
   return (
     <>
       <S.SearchWrapper>
@@ -34,6 +45,10 @@ export default function Search({ refetch, setKeyword }: IProps): JSX.Element {
             onChange={onChangeKeyword}
           />
         </S.SearchBar>
+        <div style={{ width: "50%", textAlign: "right" }}>
+          <MyDatePicker setDate={setDate} />
+          <S.SearchBtn onClick={onClickSearchingDate}>검색하기</S.SearchBtn>
+        </div>
       </S.SearchWrapper>
     </>
   );

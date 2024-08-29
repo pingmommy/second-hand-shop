@@ -44,11 +44,16 @@ export const SearchIcon = styled(SearchOutlined)`
 `;
 
 export const SearchBtn = styled.button`
-  width: 80px;
-  height: 40px;
-  border: 2px solid var(--color-grey-500);
-  color: var(--color-grey-700);
+  width: 5.5rem;
+  height: 2.7rem;
+  margin-left: 1.5rem;
+  color: white;
+  border: none;
   border-radius: 5px;
-  background-color: transparent;
-  font-size: 14px;
+  background-color: var(--color-grey-900);
+  font-size: 0.9rem;
+  cursor: pointer;
+  :hover {
+    background-color: rgb(109 92 92);
+  }
 `;
