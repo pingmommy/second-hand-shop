@@ -5,6 +5,12 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   padding: 1.5rem 2rem;
   align-items: flex-end;
+  width: 100%;
+  height: 6rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 999;
 `;
 
 export const Logo = styled.a`
@@ -14,6 +20,7 @@ export const Logo = styled.a`
   margin-right: 1.5rem;
   color: var(--color-grey-900);
   cursor: pointer;
+  z-index: 999;
 `;
 
 export const NavLink = styled.a`

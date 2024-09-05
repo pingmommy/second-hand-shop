@@ -12,5 +12,6 @@ export interface IUploadImageCardProps {
 
 export interface IImageSelectorProps {
   setValue: UseFormSetValue<ICreateBoardInput>;
+
   data?: Pick<IQuery, "fetchBoard"> | undefined;
 }

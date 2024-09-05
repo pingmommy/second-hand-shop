@@ -6,12 +6,13 @@ import {
 } from "react";
 import * as S from "./Search.styles";
 import _ from "lodash";
+
+import type { ApolloQueryResult } from "@apollo/client";
+import MyDatePicker from "./datePicker";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-} from "../../../commons/types/generated/types";
-import type { ApolloQueryResult } from "@apollo/client";
-import MyDatePicker from "../../units/board/list/datePicker";
+} from "../../../../commons/types/generated/types";
 
 interface IProps {
   refetch: (

@@ -4,8 +4,8 @@ import weekday from "dayjs/plugin/weekday";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/ko";
 import { ConfigProvider, DatePicker } from "antd";
-import locale from "antd/es/date-picker/locale/ko_KR";
 import type { RangePickerProps } from "antd/es/date-picker";
+import locale from "antd/es/date-picker/locale/ko_KR";
 
 dayjs.extend(weekday);
 dayjs.extend(localeData);

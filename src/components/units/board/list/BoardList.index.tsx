@@ -4,29 +4,16 @@ import Pagination from "../../../commons/pagination/Pagination.index";
 import BoardListBody from "./body/BoardListBody.index";
 import BoarListHeader from "./header/BoardListHeader.index";
 import * as S from "./footer/BoardListFooter.style";
-import { gql, useQuery } from "@apollo/client";
-import type {
-  IQuery,
-  IQueryFetchBoardsCountArgs,
-} from "../../../../commons/types/generated/types";
-import Search from "../../../commons/search/Search.index";
 import { useState } from "react";
+import { useQueryFetchBoardsCount } from "../../../commons/hooks/queries/useQueryFetchBoardsCount";
+import Search from "../../../commons/search/01/Search.index";
 
 export default function BoardList(): JSX.Element {
   const [keyword, setKeyword] = useState("");
 
   const { data, refetch } = useQueryFetchBoards();
 
-  const FETCH_BOARDS_COUNT = gql`
-    query {
-      fetchBoardsCount
-    }
-  `;
-
-  const { data: BoardCount } = useQuery<
-    Pick<IQuery, "fetchBoardsCount">,
-    IQueryFetchBoardsCountArgs
-  >(FETCH_BOARDS_COUNT);
+  const { data: BoardCount } = useQueryFetchBoardsCount();
 
   const lastPage = Math.ceil((BoardCount?.fetchBoardsCount ?? 10) / 10);
 

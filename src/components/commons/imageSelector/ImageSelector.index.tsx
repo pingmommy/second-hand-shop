@@ -25,6 +25,7 @@ export default function ImageSelector({
     imageUrlsArr[index] = uploadedUrl;
     setImageUrls([...imageUrlsArr]);
     imageUrlsArr = imageUrlsArr.filter((el) => el !== "");
+
     setValue("images", [...imageUrlsArr], { shouldDirty: true });
     // console.log(imageUrls, imageUrlsArr);
   };
