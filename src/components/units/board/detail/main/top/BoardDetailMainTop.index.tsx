@@ -1,5 +1,7 @@
+import { Avatar } from "antd";
 import { getDate } from "../../../../../../commons/libraries/getDate";
 import * as S from "./BoardDetailMainTop.styles";
+import { UserOutlined } from "@ant-design/icons";
 
 export default function BoardDetailMainTop(props: any): JSX.Element {
   return (
@@ -7,7 +9,7 @@ export default function BoardDetailMainTop(props: any): JSX.Element {
       <S.Header>
         <S.Title>{props.data?.fetchBoard?.title}</S.Title>
         <S.userWrapper>
-          <S.Avatar src="/icons/avatar.png" />
+          <Avatar size="large" icon={<UserOutlined />} />
           <div>
             <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
             <S.Date>

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
-import type { MouseEvent } from "react";
 import * as S from "../myPage.style";
-import { GhostButton } from "../../../commons/button/02";
-import Search03 from "../../../commons/search/03/Search.index";
 import { getDate } from "../../../../commons/libraries/getDate";
+import SearchBarWithBtn from "../../../commons/search/searchBarWithBtn/SearchBarWithBtn";
+import { useQueryFetchPointTransactions } from "../../../commons/hooks/queries/useQueryFetchPointTransactions";
+import { useQueryFetchPointTransactionsOfLoading } from "../../../commons/hooks/queries/useQueryFetchPointTransactionsOfLoading";
+import { useQueryFetchPointTransactionsOfBuying } from "../../../commons/hooks/queries/useQueryFetchPointTransactionsOfBuying";
+import { useQueryFetchPointTransactionsOfSelling } from "../../../commons/hooks/queries/useQueryFetchPointTrasactionsOfSelling";
 
 const MY_POINT_LIST = [
   { title: "전체내역", id: "all-history" },
@@ -14,28 +16,23 @@ const MY_POINT_LIST = [
 ];
 
 export default function MyPoint({ page }: any): JSX.Element {
-  const [isSelected, setIsSelected] = useState("all-history");
+  const { data } = useQueryFetchPointTransactions(1, ""); // 전체
+  const { data: LD } = useQueryFetchPointTransactionsOfLoading(1, ""); // 충전
+  const { data: BD } = useQueryFetchPointTransactionsOfBuying(1, ""); // 구매
+  const { data: SD } = useQueryFetchPointTransactionsOfSelling(1, ""); // 판매
+  const [keyword, setKeyword] = useState("");
 
-  const onClickCategory = (event: MouseEvent<HTMLButtonElement>): void => {
-    setIsSelected(event.currentTarget.id);
+  const handleRefetch = (value: string): void => {
+    console.log(value);
   };
   return (
     <>
       <S.PageHeader>
-        <S.ButtonWrapper>
-          {MY_POINT_LIST.map((el) =>
-            el.id === isSelected ? (
-              <S.SelectedButton key={el.id}>{el.title}</S.SelectedButton>
-            ) : (
-              <GhostButton key={el.id} onClick={onClickCategory} id={el.id}>
-                {el.title}
-              </GhostButton>
-            )
-          )}
-        </S.ButtonWrapper>
-        <div style={{ width: "50%" }}>
-          <Search03 />
-        </div>
+        <SearchBarWithBtn
+          list={MY_POINT_LIST}
+          setKeyword={setKeyword}
+          onSearch={handleRefetch}
+        />
       </S.PageHeader>
       <S.TableWrapper>
         <S.Trow>

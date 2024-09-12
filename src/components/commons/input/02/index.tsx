@@ -29,23 +29,26 @@ const Error = styled.p`
   padding-top: 0.3rem;
 `;
 
-interface IInput01Props {
+interface IInput02Props {
   label: string;
   placeholder?: string;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
+  type?: "text" | "password";
 }
 
+// 좁은 곳에 사용하는 input타입
 export const Input02 = ({
   label,
   placeholder,
   register,
-}: IInput01Props): JSX.Element => {
+  type,
+}: IInput02Props): JSX.Element => {
   return (
     <>
       <InnerWrapper>
         <Title>{label}</Title>
         <Input
-          type="text"
+          type={type ?? "text"}
           defaultValue={""}
           placeholder={placeholder}
           {...register}

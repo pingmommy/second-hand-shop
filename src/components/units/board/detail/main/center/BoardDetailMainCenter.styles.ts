@@ -38,10 +38,19 @@ export const DownCount = styled.div`
   color: var(--color-grey-500);
 `;
 
-export const Icon = styled.div`
+export const LikeIcon = styled.div`
   padding: 0 10px;
   text-align: center;
   cursor: pointer;
+  .material-symbols-outlined {
+    color: var(--color-primary-600);
+  }
+`;
+
+export const DislikeIcon = styled(LikeIcon)`
+  .material-symbols-outlined {
+    color: var(--color-grey-500);
+  }
 `;
 
 export const YoutubeWrapper = styled.div`

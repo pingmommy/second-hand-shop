@@ -36,7 +36,8 @@
     "remove": "^0.1.5",
     "slick-carousel": "^1.8.1",
     "uuid": "^10.0.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

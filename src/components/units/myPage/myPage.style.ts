@@ -26,30 +26,31 @@ export const TableWrapper = styled.div`
   border-bottom: 3px solid var(--color-grey-500);
 `;
 
-export const Trow = styled.div`
+export const Trow = styled.ul`
   border-bottom: 1px solid var(--color-grey-300);
   height: 3rem;
   line-height: 3rem;
-  display: flex;
   text-align: center;
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.3fr 2fr repeat(
+      ${({ colCount }: { colCount: number }) => colCount},
+      1fr
+    );
 `;
 
-export const T_Head = styled.span`
+export const THead = styled.li`
   font-weight: bold;
-  width: 15%;
-`;
-export const T_Title = styled.span`
-  font-weight: bold;
-  width: 55%;
-  display: inline-block;
 `;
 
-export const T_Colum = styled.div`
-  width: 15%;
+export const TColum = styled.li``;
+export const TStatus = styled.li`
+  color: var(--color-primary-600);
+  font-weight: 600;
 `;
 
-export const T_Colum_title = styled.a`
-  width: 55%;
+export const TColum_title = styled.a`
   cursor: pointer;
 
   :hover {

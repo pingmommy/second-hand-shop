@@ -68,9 +68,3 @@ export const BoardWriteMain = (props: IBoardWriteMainProps): JSX.Element => {
     </>
   );
 };
-
-/* <S.TextArea
-          {...props.register("contents")}
-          defaultValue={props.data?.fetchBoard?.contents}
-        ></S.TextArea>
-        <S.Error>{props.errors.contents?.message}</S.Error> */

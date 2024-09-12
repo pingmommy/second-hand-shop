@@ -2,15 +2,12 @@ import { useEffect, useRef } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import styled from "@emotion/styled";
-// import type { UseFormSetValue, UseFormTrigger } from "react-hook-form";
-// import type { ICreateBoardInput } from "../../../../../commons/types/generated/types";
+
 // import DOMPurify from "dompurify";
 
-// interface IProps {
-//   data: any;
-//   setValue: UseFormSetValue<ICreateBoardInput>;
-//   trigger: UseFormTrigger<ICreateBoardInput>;
-// }
+interface IProps {
+  setContents: (contents: string) => void;
+}
 
 const InnerWrapper = styled.div`
   padding: 20px 0;
@@ -20,7 +17,7 @@ const Title = styled.div`
   padding-bottom: 5px;
 `;
 
-export default function MyQuillEditor(): JSX.Element {
+export default function MyQuillEditor(props: IProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -49,21 +46,20 @@ export default function MyQuillEditor(): JSX.Element {
           ],
         },
       });
-      //   quill.on("text-change", () => {
-      //     // let contents = quill.root.innerHTML;
-      //     // contents = contents === "<p><br></p>" ? "" : contents;
-      //     // console.log(contents);
-      //     // setValue("contents", contents, { shouldDirty: true });
-      //     // void trigger("contents");
-      //   });
+      quill.on("text-change", () => {
+        let contents = quill.root.innerHTML;
+        contents = contents === "<p><br></p>" ? "" : contents;
+        console.log(contents);
+        props.setContents(contents);
+      });
 
-      //   return () => {
-      //     quill.off("text-change");
-      //   };
+      return () => {
+        quill.off("text-change");
+      };
     }
   }, []);
 
-  //   const clean = DOMPurify.sanitize();
+  // const clean = DOMPurify.sanitize();
   return (
     <InnerWrapper>
       <Title>상품설명</Title>

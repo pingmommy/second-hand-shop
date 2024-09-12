@@ -3,8 +3,8 @@ import { SearchOutlined } from "@ant-design/icons";
 export const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  width: 100%;
+  margin: 0 auto;
+  width: 80%;
   justify-content: space-between;
   font-family: "NanumGothicCoding-Regular", sans-serif;
   color: var(--color-grey-700);
@@ -24,22 +24,21 @@ export const SoldButton = styled.button`
 `;
 
 export const SearchBar = styled.div`
-  width: 23rem;
+  width: 50%;
   height: 2.5rem;
-  background-color: #f5f5f5;
-  border-radius: 5px;
+  border: 1px solid var(--color-grey-300);
+  border-radius: 20px;
   padding-left: 1.25rem;
   line-height: 2.5rem;
   flex-grow: 1;
 
   :focus-within {
     background-color: white;
-    border: 2px solid var(--color-grey-300);
+    border: 1px solid var(--color-primary-600);
   }
 `;
 
 export const SearchInput = styled.input`
-  background-color: #f5f5f5;
   width: 90%;
   border: none;
   margin-left: 0.7rem;
@@ -51,7 +50,6 @@ export const SearchInput = styled.input`
 
   :focus {
     outline: none;
-    background-color: white;
   }
 `;
 
@@ -68,10 +66,8 @@ export const SearchBtn = styled.button`
   border-radius: 5px;
   background-color: var(--color-grey-900);
   font-size: 0.9rem;
-  flex-grow: 0;
-
   cursor: pointer;
   :hover {
-    background-color: rgb(109 92 92);
+    background-color: rgb(252 195 19);
   }
 `;

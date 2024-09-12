@@ -1,19 +1,27 @@
 import { useState } from "react";
 import ProductListHeader from "./header/ProductListHeader.index";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/queries/useQueryFetchUsedItems";
-import Search02 from "../../../commons/search/02/Search.index";
 import ListItemCard from "./card/List-ItemCard.index";
 import InfiniteScroll from "react-infinite-scroller";
 import { ListWrapper } from "../../../commons/wrapper/wrapper";
 import SideBar from "./sidebar/ListSideBar.index";
+import * as S from "./ProductList.style";
+import SearchBarWithBtn from "../../../commons/search/searchBarWithBtn/SearchBarWithBtn";
+
+const LIST = [
+  { id: "onSale", title: "판매중인 상품" },
+  { id: "isSoldOut", title: "판매된 상품" },
+];
 
 export default function ProductList(): JSX.Element {
   const [keyword, setKeyword] = useState("");
+  const [isSoldout, setIsSoldout] = useState(false);
   const [page, setPage] = useState(1);
 
-  const { data, refetch, fetchMore, loading } = useQueryFetchUsedItems();
+  const { data, fetchMore, loading, refetch } = useQueryFetchUsedItems();
 
   const loadMoreUsedItem = (): void => {
+    if (loading) return;
     void fetchMore({
       variables: { page: page + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -32,31 +40,38 @@ export default function ProductList(): JSX.Element {
     });
   };
 
-  const hasMoreItem =
-    data?.fetchUseditems.length !== undefined &&
-    data?.fetchUseditems.length % 10 === 0 &&
-    !loading;
+  const handleKeyword = (value: string): void => {
+    void refetch({ search: value, page: 1, isSoldout });
+  };
 
   return (
     <>
       <ProductListHeader />
-      <Search02 />
+      <S.SearchBarWrapper>
+        <SearchBarWithBtn
+          list={LIST}
+          setKeyword={setKeyword}
+          onSearch={handleKeyword}
+        />
+      </S.SearchBarWrapper>
 
       <ListWrapper>
-        <div style={{ width: "85%" }}>
+        <S.InnerWrapper>
           {data?.fetchUseditems !== undefined &&
             data?.fetchUseditems.length > 0 && (
               <InfiniteScroll
                 pageStart={0}
                 loadMore={loadMoreUsedItem}
-                hasMore={hasMoreItem}
+                hasMore={true}
+                threshold={200}
+                loader={<div key={0}>Loading...</div>}
               >
                 {data?.fetchUseditems.map((item) => (
                   <ListItemCard key={item._id} item={item} />
                 ))}
               </InfiniteScroll>
             )}
-        </div>
+        </S.InnerWrapper>
         <SideBar />
       </ListWrapper>
     </>

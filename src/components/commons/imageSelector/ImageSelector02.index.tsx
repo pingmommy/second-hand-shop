@@ -8,19 +8,6 @@ export default function ImageSelector02({
   imageUrls: string[];
   setImageUrl: (selectedImage: string[]) => void;
 }): JSX.Element {
-  // const [imageUrls, setImageUrls] = useState(["", "", ""]);
-  // console.log(data);
-  // useEffect(() => {
-  //   if (
-  //     data?.fetchBoard?.images !== undefined &&
-  //     data?.fetchBoard?.images !== null
-  //   ) {
-  //     const a = [...imageUrls];
-  //     data?.fetchBoard?.images.map((el, index) => (a[index] = el));
-  //     setImageUrls([...a]);
-  //   }
-  // }, [data]);
-
   const setImageUrlsValue = (uploadedUrl: string, index: number): void => {
     const imageUrlsArr = [...imageUrls];
     imageUrlsArr[index] = uploadedUrl;

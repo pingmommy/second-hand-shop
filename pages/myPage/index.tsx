@@ -1,3 +1,4 @@
+import { useAuth } from "../../src/components/commons/hooks/customs/useAuth";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import LayoutSideBar from "../../src/components/commons/layout/sidebar/LayoutSidebar.index";
@@ -12,6 +13,8 @@ export const LayoutSidebarWrapper = styled(ListWrapper)`
 `;
 export default function myPagePage(): JSX.Element {
   const [page, setPage] = useState("market");
+
+  useAuth();
   return (
     <LayoutSidebarWrapper>
       <div>

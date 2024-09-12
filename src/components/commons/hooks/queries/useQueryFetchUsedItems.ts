@@ -31,7 +31,7 @@ export const useQueryFetchUsedItems = (): QueryResult<
   const query = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
-  >(FETCH_USEDITEMS);
+  >(FETCH_USEDITEMS, { fetchPolicy: "cache-and-network" });
 
   return query;
 };

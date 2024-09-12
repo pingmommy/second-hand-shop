@@ -11,6 +11,8 @@ export default function Carousel({
 }: {
   data: Pick<IQuery, "fetchUseditem"> | undefined;
 }): JSX.Element {
+  const filteredImages = data?.fetchUseditem.images?.filter((el) => el !== "");
+
   function Arrow(props: any): JSX.Element {
     const { className, style, onClick } = props;
     return (
@@ -29,7 +31,7 @@ export default function Carousel({
       return (
         <a>
           <img
-            src={`${BASE_URL}${data?.fetchUseditem?.images?.[i]}`}
+            src={`${BASE_URL}${filteredImages?.[i]}`}
             style={{
               width: "100px",
               height: "100px",
@@ -41,7 +43,7 @@ export default function Carousel({
     },
     dots: true,
     dotsClass: "slick-dots",
-    infinite: true,
+    infinite: filteredImages != null && filteredImages.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -53,13 +55,24 @@ export default function Carousel({
     <S.ImageWrapper>
       <S.slickThumb>
         <Slider {...settings}>
-          {data?.fetchUseditem.images
-            ?.filter((el) => el !== "")
-            .map((image, idx) => (
+          {filteredImages?.map((image, idx) => {
+            console.log(idx, image);
+            return (
               <div key={idx}>
-                <img src={BASE_URL + image} style={{ width: "100%" }} />
+                <img
+                  src={BASE_URL + image}
+                  style={{
+                    width: "500px",
+                    height: "400px",
+                    // maxHeight: "500px",
+                    objectFit: "contain",
+
+                    padding: "0 0.5rem",
+                  }}
+                />
               </div>
-            ))}
+            );
+          })}
         </Slider>
       </S.slickThumb>
     </S.ImageWrapper>

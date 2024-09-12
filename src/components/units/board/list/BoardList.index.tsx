@@ -6,7 +6,7 @@ import BoarListHeader from "./header/BoardListHeader.index";
 import * as S from "./footer/BoardListFooter.style";
 import { useState } from "react";
 import { useQueryFetchBoardsCount } from "../../../commons/hooks/queries/useQueryFetchBoardsCount";
-import Search from "../../../commons/search/01/Search.index";
+import Search from "../../../commons/search/searchBarWithDayPicker/Search.index";
 
 export default function BoardList(): JSX.Element {
   const [keyword, setKeyword] = useState("");

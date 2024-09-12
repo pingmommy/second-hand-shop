@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 
-export const CardWrapper = styled.section`
+export const CardWrapper = styled.div`
   display: flex;
   padding: 0.5rem 0 1rem 0;
   border-bottom: 1px solid var(--color-grey-300);
+  cursor: pointer;
 `;
 
 export const ImageBox = styled.div`
@@ -65,12 +65,12 @@ export const ItemPriceBox = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .material-symbols-outlined {
+    color: var(--color-primary-600);
+    margin-right: 0.4rem;
+  }
 `;
 export const Avatar = styled(AccountCircleIcon)`
   color: var(--color-grey-500);
-`;
-
-export const SmileIcon = styled(SentimentSatisfiedAltIcon)`
-  color: var(--color-primary-600);
-  margin-right: 0.4rem;
 `;

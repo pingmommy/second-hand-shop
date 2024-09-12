@@ -16,9 +16,9 @@ export const CardWrapper = styled.article`
 export const ListWrapper = styled.article`
   margin: 1rem auto;
   width: 80%;
+  display: flex;
   font-family: "NanumGothicCoding-Regular", sans-serif;
   color: var(--color-grey-700);
-  display: flex;
   border-top: 2px solid grey;
 `;
 

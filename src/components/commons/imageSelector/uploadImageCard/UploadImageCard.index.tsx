@@ -5,6 +5,7 @@ import type { ChangeEvent } from "react";
 import ValidationCheck from "../validationCheck";
 import { useMutationUploadFile } from "../../hooks/mutations/useMutationUploadFile";
 import type { IUploadImageCardProps } from "../ImageSelector.types";
+
 const BASE_URL = "https://storage.googleapis.com/";
 
 export default function UploadImageCard({
@@ -41,9 +42,6 @@ export default function UploadImageCard({
     }
   };
 
-  // const uploadButton = (
-  //   <button style={{ border: 0, background: "none" }} type="button"></button>
-  // );
   return (
     <>
       <input

@@ -6,12 +6,17 @@ import ProductDetailHeader from "./header/ProductDetailHeader.index";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/queries/useQueryFetchUsedItem";
 import Carousel from "./carousel/ProductDetail.Carousel";
 import ProductDetailFooter from "./footer/ProductDetailFooter.index";
+import { useRouterIdChecker } from "../../../commons/hooks/customs/useRouterIdChecker";
+import { useMutationUsedItemPick } from "../../../commons/hooks/mutations/useMutationUsedItemPick";
 
 export default function ProductDetail(): JSX.Element {
-  const { data } = useQueryFetchUsedItem();
+  const { id } = useRouterIdChecker("borrdId");
+  const { data } = useQueryFetchUsedItem(id);
+  const { handleToggleUsedItemPick } = useMutationUsedItemPick();
 
-  console.log(data);
-
+  const handleIPick = (): void => {
+    void handleToggleUsedItemPick(id);
+  };
   return (
     <>
       <CardWrapper>
@@ -23,7 +28,7 @@ export default function ProductDetail(): JSX.Element {
               <h3>{data?.fetchUseditem.name}</h3>
             </div>
             <S.LikeBox>
-              <S.LikeIcon />
+              <S.LikeIcon onClick={handleIPick} />
               <S.LikeCount>{data?.fetchUseditem.pickedCount}</S.LikeCount>
             </S.LikeBox>
           </S.InfoWrapper>
@@ -31,6 +36,7 @@ export default function ProductDetail(): JSX.Element {
           <Carousel data={data} />
           <S.InfoDetailWrapper>
             <p
+              style={{ lineHeight: "1.5rem" }}
               dangerouslySetInnerHTML={{
                 __html: data?.fetchUseditem?.contents ?? "",
               }}

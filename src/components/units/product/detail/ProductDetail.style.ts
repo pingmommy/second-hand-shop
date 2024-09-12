@@ -19,6 +19,7 @@ export const LikeBox = styled.div`
 
 export const LikeIcon = styled(FavoriteIcon)`
   color: var(--color-primary-600);
+  cursor: pointer;
 `;
 
 export const LikeCount = styled.p`
@@ -33,6 +34,7 @@ export const Price = styled.p`
 `;
 
 export const InfoDetailWrapper = styled.section`
+  padding-top: 10rem;
   border-bottom: 2px solid var(--color-grey-300);
 `;
 

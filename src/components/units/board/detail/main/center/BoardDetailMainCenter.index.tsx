@@ -3,6 +3,7 @@ import { useBoardLike } from "../../../../../commons/hooks/customs/useBoardLike"
 import { useRouterIdChecker } from "../../../../../commons/hooks/customs/useRouterIdChecker";
 import * as S from "./BoardDetailMainCenter.styles";
 import DOMPurify from "dompurify";
+import { MyIcon } from "../../../../../commons/icon/MyIcon.index";
 interface IProps {
   data: Pick<IQuery, "fetchBoard"> | undefined;
 }
@@ -37,14 +38,14 @@ export default function BoardDetailMainCenter(props: IProps): JSX.Element {
             </S.YoutubeWrapper>
           )}
         <S.Footer>
-          <S.Icon onClick={onClickLikeBoard}>
-            <img src="/icons/ic_thumb_up_off_alt-24px.svg" />
+          <S.LikeIcon onClick={onClickLikeBoard}>
+            <MyIcon iconName="thumb_up" />
             <S.UpCount>{props.data?.fetchBoard?.likeCount}</S.UpCount>
-          </S.Icon>
-          <S.Icon onClick={onClickDisLikeBoard}>
-            <img src="/icons/ic_thumb_down-24px.svg" />
+          </S.LikeIcon>
+          <S.DislikeIcon onClick={onClickDisLikeBoard}>
+            <MyIcon iconName="thumb_down" />
             <S.DownCount>{props.data?.fetchBoard?.dislikeCount}</S.DownCount>
-          </S.Icon>
+          </S.DislikeIcon>
         </S.Footer>
       </S.Main>
     </>

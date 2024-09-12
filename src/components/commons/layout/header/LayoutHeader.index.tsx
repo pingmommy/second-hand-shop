@@ -1,7 +1,15 @@
 import Link from "next/link";
 import * as S from "./LayoutHeader.style";
+import { useLogIn } from "../../../../commons/stores";
+import LoggedInHeader from "./loggedIn/LoggedIn.index";
+import { useQueryFetchUserLoggedIn } from "../../hooks/queries/useQueryFetchUserLoggedIn";
 
 export default function LayoutHeader(): JSX.Element {
+  const isLoggedIn = useLogIn((state) => state.isLoggedIn);
+
+  const { data } = useQueryFetchUserLoggedIn();
+  console.log(data);
+
   return (
     <>
       <S.Wrapper>
@@ -19,14 +27,20 @@ export default function LayoutHeader(): JSX.Element {
             <S.NavLink>마이페이지</S.NavLink>
           </Link>
         </S.InnerWrapper>
-        <S.InnerWrapper>
-          <Link href="/logIn">
-            <S.NavLink>로그인</S.NavLink>
-          </Link>
-          <Link href="/signIn">
-            <S.SignInLink>회원가입</S.SignInLink>
-          </Link>
-        </S.InnerWrapper>
+        {isLoggedIn ? (
+          <div style={{ marginRight: "6rem" }}>
+            <LoggedInHeader data={data} />
+          </div>
+        ) : (
+          <S.InnerWrapper>
+            <Link href="/logIn">
+              <S.NavLink>로그인</S.NavLink>
+            </Link>
+            <Link href="/signIn">
+              <S.SignInLink>회원가입</S.SignInLink>
+            </Link>
+          </S.InnerWrapper>
+        )}
       </S.Wrapper>
     </>
   );

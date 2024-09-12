@@ -1,8 +1,13 @@
 import styled from "@emotion/styled";
+import { ValidationBtn } from "../../commons/button/02";
 
 export const Title = styled.h1`
   margin-bottom: 3rem;
   text-align: center;
+`;
+
+export const InputWrapper = styled.div`
+  margin-bottom: 2rem;
 `;
 
 export const Input = styled.input`
@@ -12,10 +17,16 @@ export const Input = styled.input`
   height: 2.5rem;
   padding-left: 0.6rem;
   border-radius: 3px;
-  margin-bottom: 2rem;
+
   :focus {
     outline-color: var(--color-primary-600);
   }
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  padding: 0.5rem 0 0 0.5rem;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -31,4 +42,9 @@ export const LogoWrapper = styled.div`
 
 export const Strong = styled.strong`
   color: var(--color-primary-600);
+`;
+
+export const SignInBtn = styled(ValidationBtn)`
+  background-color: ${(props: { isValid: boolean }) =>
+    props.isValid ? "var(--color-primary-600)" : "var(--color-grey-100)"};
 `;

@@ -6,6 +6,10 @@ export const ImageWrapper = styled.section`
 `;
 
 export const slickThumb = styled.div`
+  .slick-dots {
+    bottom: -110px;
+  }
+
   .slick-dots li {
     width: 6rem;
     border-radius: 5px;
@@ -16,6 +20,8 @@ export const slickThumb = styled.div`
     border-radius: 5px;
   }
   padding: 0 50px;
+  width: 38rem;
+  margin: 0 auto;
 `;
 
 export const Arrow = styled.div`

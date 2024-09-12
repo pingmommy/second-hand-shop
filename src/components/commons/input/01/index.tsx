@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import type { ReactNode } from "react";
-// import type { ICreateUseditemInput } from "../../../../commons/types/generated/types";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 const Title = styled.div`

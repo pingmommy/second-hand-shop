@@ -6,8 +6,8 @@ import type {
 } from "../../../../commons/types/generated/types";
 
 const FETCH_USED_ITEM = gql`
-  query {
-    fetchUseditem(useditemId: "6553493e5d6eaa0029f7c7ec") {
+  query fetchUseditem($useditemId: ID!) {
+    fetchUseditem(useditemId: $useditemId) {
       _id
       name
       remarks
@@ -30,14 +30,13 @@ const FETCH_USED_ITEM = gql`
   }
 `;
 
-export const useQueryFetchUsedItem = (): QueryResult<
-  Pick<IQuery, "fetchUseditem">,
-  IQueryFetchUseditemArgs
-> => {
+export const useQueryFetchUsedItem = (
+  useditemId: string
+): QueryResult<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs> => {
   const query = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
-  >(FETCH_USED_ITEM);
+  >(FETCH_USED_ITEM, { variables: { useditemId } });
 
   return query;
 };

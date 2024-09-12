@@ -1,6 +1,8 @@
+import { Avatar } from "antd";
 import { getDate } from "../../../../../commons/libraries/getDate";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import * as S from "./ProductDetailHeader.styles";
+import { UserOutlined } from "@ant-design/icons";
 
 export default function ProductDetailHeader({
   data,
@@ -11,7 +13,7 @@ export default function ProductDetailHeader({
     <>
       <S.Header>
         <S.userWrapper>
-          <S.Avatar src="/icons/avatar.png" />
+          <Avatar size="large" icon={<UserOutlined />} />
           <div style={{ marginLeft: "0.5rem" }}>
             <S.Writer>{data?.fetchUseditem.seller?.name}</S.Writer>
             <S.Date>{getDate(String(data?.fetchUseditem.createdAt))}</S.Date>

@@ -22,9 +22,7 @@ export const ValidationBtn = styled.button`
   font-size: 1rem;
   color: var(--color-grey-700);
   font-family: "NanumGothicCoding-Bold", sans-serif;
-  :hover {
-    background-color: rgb(251 206 68);
-  }
+  cursor: pointer;
 `;
 
 export const GhostButton = styled.button`

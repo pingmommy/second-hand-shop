@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Avatar } from "@mui/material";
-import { SmileOutlined } from "@ant-design/icons";
 
 export const SidebarInnerWrapper = styled.div`
   width: 10rem;
@@ -21,12 +20,13 @@ export const userName = styled.h3`
 
 export const userInfo = styled.div`
   padding: 0.5rem 0 3.5rem 0;
-
   color: var(--color-grey-500);
-`;
+  display: flex;
+  align-items: center;
 
-export const InfoIcon = styled(SmileOutlined)`
-  color: var(--color-primary-600);
+  .material-symbols-outlined {
+    color: var(--color-primary-600);
+  }
 `;
 
 export const MyPageAvatar = styled(Avatar)`
@@ -56,6 +56,6 @@ export const MyPageCategory = styled.span`
 `;
 
 export const MyPageAvatarSmall = styled(Avatar)`
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.3rem;
+  height: 1.3rem;
 `;
