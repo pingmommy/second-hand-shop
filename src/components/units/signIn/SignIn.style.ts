@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ValidationBtn } from "../../commons/button/02";
+import { ValidationBtn } from "../../commons/ui/button/02";
 
 export const Title = styled.h1`
   margin-bottom: 3rem;
@@ -21,12 +21,6 @@ export const Input = styled.input`
   :focus {
     outline-color: var(--color-primary-600);
   }
-`;
-
-export const ErrorMessage = styled.p`
-  color: red;
-  font-size: 0.8rem;
-  padding: 0.5rem 0 0 0.5rem;
 `;
 
 export const ButtonWrapper = styled.div`

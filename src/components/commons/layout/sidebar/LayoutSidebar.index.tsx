@@ -1,6 +1,6 @@
 import * as S from "./LayoutSidebar.style";
 import type { MouseEvent } from "react";
-import { MyIcon } from "../../icon/MyIcon.index";
+import { MyIcon } from "../../ui/icon/MyIcon.index";
 
 const MYPAGE_LIST = [
   {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { GhostButton } from "../../button/02";
+import { GhostButton } from "../../ui/button/02";
 import { SearchOutlined } from "@ant-design/icons";
 
 export const ButtonWrapper = styled.div`

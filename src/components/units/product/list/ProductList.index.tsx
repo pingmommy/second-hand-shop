@@ -3,7 +3,7 @@ import ProductListHeader from "./header/ProductListHeader.index";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/queries/useQueryFetchUsedItems";
 import ListItemCard from "./card/List-ItemCard.index";
 import InfiniteScroll from "react-infinite-scroller";
-import { ListWrapper } from "../../../commons/wrapper/wrapper";
+import { ListWrapper } from "../../../commons/ui/wrapper/wrapper";
 import SideBar from "./sidebar/ListSideBar.index";
 import * as S from "./ProductList.style";
 import SearchBarWithBtn from "../../../commons/search/searchBarWithBtn/SearchBarWithBtn";
@@ -16,6 +16,7 @@ const LIST = [
 export default function ProductList(): JSX.Element {
   const [keyword, setKeyword] = useState("");
   const [isSoldout, setIsSoldout] = useState(false);
+  const [isSelected, setIsSelected] = useState("");
   const [page, setPage] = useState(1);
 
   const { data, fetchMore, loading, refetch } = useQueryFetchUsedItems();
@@ -41,6 +42,7 @@ export default function ProductList(): JSX.Element {
   };
 
   const handleKeyword = (value: string): void => {
+    setKeyword(value);
     void refetch({ search: value, page: 1, isSoldout });
   };
 
@@ -50,8 +52,9 @@ export default function ProductList(): JSX.Element {
       <S.SearchBarWrapper>
         <SearchBarWithBtn
           list={LIST}
-          setKeyword={setKeyword}
           onSearch={handleKeyword}
+          isSelected={isSelected}
+          setIsSelected={setIsSelected}
         />
       </S.SearchBarWrapper>
 

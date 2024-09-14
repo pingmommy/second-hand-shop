@@ -23,6 +23,8 @@ export const ValidationBtn = styled.button`
   color: var(--color-grey-700);
   font-family: "NanumGothicCoding-Bold", sans-serif;
   cursor: pointer;
+  background-color: ${({ isValid }: { isValid: boolean }) =>
+    isValid ? "var(--color-primary-600);" : "var(--color-grey-100);"};
 `;
 
 export const GhostButton = styled.button`

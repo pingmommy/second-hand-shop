@@ -1,39 +1,25 @@
 import { useForm } from "react-hook-form";
 import * as S from "./SignIn.style";
-import { CardWrapper2 } from "../../commons/wrapper/wrapper";
-import { Input02 } from "../../commons/input/02";
+import { CardWrapper2 } from "../../commons/ui/wrapper/wrapper";
+import { Input02 } from "../../commons/ui/input/02";
 import { Logo } from "../../commons/layout/header/LayoutHeader.style";
 import Link from "next/link";
 import type { ICreateUserInput } from "../../../commons/types/generated/types";
 import { useCreateUser } from "../../commons/hooks/customs/useCreateUser";
-import { useState } from "react";
-import type { ChangeEvent } from "react";
 import { schema } from "./SignIn.validationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function SignIn(): JSX.Element {
   const { onClickCreateUser } = useCreateUser();
 
-  const [isMatch, setIsMatch] = useState(true);
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { isValid },
   } = useForm<ICreateUserInput>({ resolver: yupResolver(schema) });
 
   const creatingUser = (data: ICreateUserInput): void => {
     void onClickCreateUser(data);
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
-    const password = getValues("password");
-
-    if (password === event.target.value) {
-      setIsMatch(true);
-    } else {
-      setIsMatch(false);
-    }
   };
 
   return (
@@ -63,11 +49,7 @@ export default function SignIn(): JSX.Element {
             <S.Input
               type="password"
               placeholder="비밀번호를 한 번 더 입력해주세요."
-              onChange={onChangePassword}
             />
-            {!isMatch && (
-              <S.ErrorMessage>비밀번호가 일치하지 않습니다.</S.ErrorMessage>
-            )}
           </S.InputWrapper>
           <Input02
             label="닉네임"

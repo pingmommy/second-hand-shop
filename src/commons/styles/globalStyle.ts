@@ -7,7 +7,7 @@ export const globalStyles = css`
   }
 
   :root {
-    --color-grey-100: #eeeeed;
+    --color-grey-100: #f0f0f0;
     --color-grey-300: #bdbdbd;
     --color-grey-500: #808080;
     --color-grey-700: rgb(58 58 58);

@@ -1,6 +1,6 @@
 import * as S from "./ProductDetail.style";
 import MyMap from "../../../commons/map/Map.index";
-import { CardWrapper } from "../../../commons/wrapper/wrapper";
+import { CardWrapper } from "../../../commons/ui/wrapper/wrapper";
 import CommentWrite from "../../comment/write/CommentWrite.index";
 import ProductDetailHeader from "./header/ProductDetailHeader.index";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/queries/useQueryFetchUsedItem";

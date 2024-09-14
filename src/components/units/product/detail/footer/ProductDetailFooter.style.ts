@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { PrimaryColorBtn } from "../../../../commons/button/02";
+import { PrimaryColorBtn } from "../../../../commons/ui/button/02";
 
 export const ButtonWrapper = styled.section`
   display: flex;

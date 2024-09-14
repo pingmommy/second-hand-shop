@@ -1,7 +1,7 @@
 import { CaretDownOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Popover } from "antd";
 import * as S from "./LoggedIn.style";
-import { MyIcon } from "../../../icon/MyIcon.index";
+import { MyIcon } from "../../../ui/icon/MyIcon.index";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import { useMutationLogoutUser } from "../../../hooks/mutations/useMutationLogoutUser";
 import { useCreatePointTransactionOfLoading } from "../../../hooks/customs/useCreatePointTransactionOfLoading";

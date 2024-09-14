@@ -1,5 +1,5 @@
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { GhostButton } from "../../button/02";
+import { GhostButton } from "../../ui/button/02";
 import * as S from "./seachBarWithBtn";
 import _ from "lodash";
 

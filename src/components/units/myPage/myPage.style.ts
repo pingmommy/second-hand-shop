@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import styled from "@emotion/styled";
-import { GhostButton } from "../../commons/button/02";
+import { GhostButton } from "../../commons/ui/button/02";
 
 export const PageHeader = styled.header`
   width: 100%;

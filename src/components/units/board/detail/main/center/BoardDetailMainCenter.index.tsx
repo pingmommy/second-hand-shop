@@ -3,7 +3,7 @@ import { useBoardLike } from "../../../../../commons/hooks/customs/useBoardLike"
 import { useRouterIdChecker } from "../../../../../commons/hooks/customs/useRouterIdChecker";
 import * as S from "./BoardDetailMainCenter.styles";
 import DOMPurify from "dompurify";
-import { MyIcon } from "../../../../../commons/icon/MyIcon.index";
+import { MyIcon } from "../../../../../commons/ui/icon/MyIcon.index";
 interface IProps {
   data: Pick<IQuery, "fetchBoard"> | undefined;
 }

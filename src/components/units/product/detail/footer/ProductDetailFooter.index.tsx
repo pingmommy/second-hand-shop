@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PrimaryColorBtn } from "../../../../commons/button/02";
+import { PrimaryColorBtn } from "../../../../commons/ui/button/02";
 import * as S from "./ProductDetailFooter.style";
 
 export default function ProductDetailFooter(): JSX.Element {

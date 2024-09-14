@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ListWrapper } from "../../../commons/wrapper/wrapper";
+import { ListWrapper } from "../../../commons/ui/wrapper/wrapper";
 
 export const SearchBarWrapper = styled(ListWrapper)`
   align-items: center;

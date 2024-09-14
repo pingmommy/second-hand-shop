@@ -8,11 +8,12 @@ import * as S from "./Search.styles";
 import _ from "lodash";
 
 import type { ApolloQueryResult } from "@apollo/client";
-import MyDatePicker from "./datePicker";
+
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
+import dynamic from "next/dynamic";
 
 interface IProps {
   refetch: (
@@ -20,6 +21,10 @@ interface IProps {
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   setKeyword: Dispatch<SetStateAction<string>>;
 }
+
+const MyDatePicker = dynamic(async () => await import("./datePicker"), {
+  ssr: false,
+});
 
 export default function Search({ refetch, setKeyword }: IProps): JSX.Element {
   const [date, setDate] = useState(["", ""]);

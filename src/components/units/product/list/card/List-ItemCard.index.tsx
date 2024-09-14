@@ -2,7 +2,7 @@ import Image from "next/image";
 import * as S from "./List-ItemCard.style";
 import type { MouseEvent } from "react";
 import { useRouter } from "next/router";
-import { MyIcon } from "../../../../commons/icon/MyIcon.index";
+import { MyIcon } from "../../../../commons/ui/icon/MyIcon.index";
 
 const BASE_URL = "https://storage.googleapis.com/";
 
