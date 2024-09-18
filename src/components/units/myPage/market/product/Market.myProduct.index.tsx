@@ -21,7 +21,7 @@ export default function MyProduct({ data }: IMyProdProps): JSX.Element {
       {data?.fetchUseditemsISold.map((item, idx) => (
         <S.Trow colCount={3} key={item._id}>
           <S.TColum>{idx + 1}</S.TColum>
-          <Link href={`/freeBoard`}>
+          <Link href={`/productShop/${item._id}`}>
             <S.TColum_title>{item.name}</S.TColum_title>
           </Link>
           <S.TStatus>판매완료</S.TStatus>

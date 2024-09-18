@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Postcode02 from "../../../commons/address/address02.index";
 import { Button01 } from "../../../commons/ui/button/01";
 import ImageSelector02 from "../../../commons/imageSelector/ImageSelector02.index";
@@ -6,47 +6,80 @@ import { Input01 } from "../../../commons/ui/input/01";
 import MyMap from "../../../commons/map/Map.index";
 import { Title01 } from "../../../commons/ui/title/01";
 import { useForm } from "react-hook-form";
-import type { ICreateUseditemInput } from "../../../../commons/types/generated/types";
+import type {
+  ICreateUseditemInput,
+  IQuery,
+} from "../../../../commons/types/generated/types";
 import dynamic from "next/dynamic";
 import { CardWrapper } from "../../../commons/ui/wrapper/wrapper";
 import { useCreateUsedItem } from "../../../commons/hooks/customs/useCreateUsedItem";
+import { useUpdateUsedItem } from "../../../commons/hooks/customs/useUpdateUsedItem";
 
 const MyQuillEditor = dynamic(
   async () => await import("../../../commons/editor"),
   { ssr: false }
 );
 
+interface IProdWriteProps {
+  prevData?: Pick<IQuery, "fetchUseditem"> | undefined;
+  isEdit: boolean;
+}
+
 export default function ProductWrite({
   isEdit,
-}: {
-  isEdit: boolean;
-}): JSX.Element {
+  prevData,
+}: IProdWriteProps): JSX.Element {
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
   const [userAddress, setUserAddress] = useState({
-    address: "",
-    zipcode: "",
+    address: prevData?.fetchUseditem.useditemAddress?.address ?? "",
+    zipcode: prevData?.fetchUseditem.useditemAddress?.zipcode ?? "",
   });
 
   const { onClickCreateUsedItem } = useCreateUsedItem();
-  const { handleSubmit, setValue, register } = useForm<ICreateUseditemInput>();
+  const { onClickUpdateUsedItem } = useUpdateUsedItem();
+
+  const {
+    handleSubmit,
+    setValue,
+    register,
+    formState: { dirtyFields },
+  } = useForm<ICreateUseditemInput>({
+    defaultValues: {
+      name: prevData?.fetchUseditem.name ?? "",
+      remarks: prevData?.fetchUseditem.remarks ?? "",
+      price: prevData?.fetchUseditem.price ?? 0,
+      tags: prevData?.fetchUseditem.tags,
+    },
+  });
+
+  useEffect(() => {
+    const imgArr = [...imageUrls];
+    prevData?.fetchUseditem.images?.forEach((el, idx) => (imgArr[idx] = el));
+    setImageUrls([...imgArr]);
+  }, []);
 
   const setAddress = (obj: { address: string; zipcode: string }): void => {
     setUserAddress({ ...obj });
-    setValue("useditemAddress", { ...obj });
+    setValue("useditemAddress", { ...obj }, { shouldDirty: true });
   };
 
   const setImageUrl = (selectedImage: string[]): void => {
     setImageUrls([...selectedImage]);
-    setValue("images", [...selectedImage]);
+    setValue("images", [...selectedImage], { shouldDirty: true });
   };
 
   const setContents = (contents: string): void => {
-    setValue("contents", contents);
+    setValue("contents", contents, { shouldDirty: true });
   };
 
   const handleUsedItemData = (data: ICreateUseditemInput): void => {
-    console.log(data);
-    void onClickCreateUsedItem(data);
+    if (isEdit) {
+      const keys = Object.keys(dirtyFields);
+      const id = prevData?.fetchUseditem._id ?? "";
+      void onClickUpdateUsedItem(data, keys, id);
+    } else {
+      void onClickCreateUsedItem(data);
+    }
   };
   return (
     <CardWrapper>
@@ -55,30 +88,41 @@ export default function ProductWrite({
         <Input01
           placeholder="상품명을 작성해주세요."
           register={register("name")}
-        >
-          상품명
-        </Input01>
+          title="상품명"
+        />
+
         <Input01
           placeholder="상품의 특징을 작성해주세요."
           register={register("remarks")}
-        >
-          한줄요약
-        </Input01>
-        <MyQuillEditor setContents={setContents} />
+          title="한줄요약"
+        />
+        <MyQuillEditor
+          setContents={setContents}
+          data={prevData?.fetchUseditem.contents ?? ""}
+        />
         <Input01
           placeholder="판매가격을 입력해주세요."
           register={register("price")}
-        >
-          판매가격
-        </Input01>
-        <Input01 placeholder="#태그 #태그 #태그" register={register("tags")}>
-          태그입력
-        </Input01>
+          title="판매가격"
+        />
+        <Input01
+          placeholder="#태그 #태그 #태그"
+          register={register("tags")}
+          title="태그입력"
+        />
+
         <MyMap address={userAddress.address} />
         <Postcode02 setAddress={setAddress} userAddress={userAddress} />
         <ImageSelector02 imageUrls={imageUrls} setImageUrl={setImageUrl} />
         <Button01 isEdit={isEdit} />
       </form>
+      <button
+        onClick={() => {
+          console.log(dirtyFields);
+        }}
+      >
+        click
+      </button>
     </CardWrapper>
   );
 }

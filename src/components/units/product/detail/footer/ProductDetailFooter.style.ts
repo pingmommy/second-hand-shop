@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { PrimaryColorBtn } from "../../../../commons/ui/button/02";
+import { GreyColorBtn } from "../../../../commons/ui/button/02";
 
 export const ButtonWrapper = styled.section`
   display: flex;
@@ -7,7 +7,6 @@ export const ButtonWrapper = styled.section`
   padding-top: 3rem;
 `;
 
-export const BtnToList = styled(PrimaryColorBtn)`
-  background-color: var(--color-grey-100);
+export const BtnToList = styled(GreyColorBtn)`
   margin-right: 1rem;
 `;

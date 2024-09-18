@@ -3,10 +3,11 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import styled from "@emotion/styled";
 
-// import DOMPurify from "dompurify";
+import DOMPurify from "dompurify";
 
 interface IProps {
   setContents: (contents: string) => void;
+  data: string;
 }
 
 const InnerWrapper = styled.div`
@@ -49,7 +50,7 @@ export default function MyQuillEditor(props: IProps): JSX.Element {
       quill.on("text-change", () => {
         let contents = quill.root.innerHTML;
         contents = contents === "<p><br></p>" ? "" : contents;
-        console.log(contents);
+        // console.log(contents);
         props.setContents(contents);
       });
 
@@ -59,14 +60,14 @@ export default function MyQuillEditor(props: IProps): JSX.Element {
     }
   }, []);
 
-  // const clean = DOMPurify.sanitize();
+  const clean = DOMPurify.sanitize(props.data);
   return (
     <InnerWrapper>
       <Title>상품설명</Title>
       <div
         ref={editorRef}
         style={{ height: "20rem" }}
-        //   dangerouslySetInnerHTML={{ __html: clean }}
+        dangerouslySetInnerHTML={{ __html: clean }}
       />
     </InnerWrapper>
   );

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import type { ReactNode } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 const Title = styled.div`
@@ -29,26 +28,21 @@ const Error = styled.p`
 `;
 
 interface IInput01Props {
-  children: ReactNode;
+  title: string;
   placeholder?: string;
   register: UseFormRegisterReturn;
 }
 
 export const Input01 = ({
-  children,
+  title,
   placeholder,
   register,
 }: IInput01Props): JSX.Element => {
   return (
     <>
       <InnerWrapper>
-        <Title>{children}</Title>
-        <Input
-          type="text"
-          defaultValue={""}
-          placeholder={placeholder}
-          {...register}
-        />
+        <Title>{title}</Title>
+        <Input type="text" placeholder={placeholder} {...register} />
         <Error>{""}</Error>
       </InnerWrapper>
     </>
