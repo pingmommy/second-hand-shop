@@ -1,30 +1,27 @@
 import Image from "next/image";
 import * as S from "./List-ItemCard.style";
-import type { MouseEvent } from "react";
-import { useRouter } from "next/router";
 import { MyIcon } from "../../../../commons/ui/icon/MyIcon.index";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import type { IUseditem } from "../../../../../commons/types/generated/types";
 
 const BASE_URL = "https://storage.googleapis.com/";
 
-export default function ListItemCard({ item }: any): JSX.Element {
-  const router = useRouter();
-  const imageUrl =
-    item.images[0] === undefined || item.images[0] === ""
-      ? ""
-      : BASE_URL + item.images[0];
+export default function ListItemCard({
+  item,
+}: {
+  item: IUseditem;
+}): JSX.Element {
+  const { onCompleteMoveToPage } = useMoveToPage();
 
-  const onClickProductDetail = (event: MouseEvent<HTMLDivElement>): void => {
-    console.log(event.currentTarget.id);
-    void router.push(`/productShop/${event.currentTarget.id}`);
-  };
+  const imageUrl = item.images?.[0] ?? "";
 
   return (
-    <S.CardWrapper onClick={onClickProductDetail} id={item._id}>
+    <S.CardWrapper onClick={onCompleteMoveToPage(`/productShop/${item._id}`)}>
       <S.ImageBox>
-        {imageUrl !== "" ? (
-          <Image src={imageUrl} layout="fill" objectFit="cover" />
-        ) : (
+        {imageUrl === undefined || imageUrl === "" ? (
           <div></div>
+        ) : (
+          <Image src={BASE_URL + imageUrl} layout="fill" objectFit="cover" />
         )}
       </S.ImageBox>
       <S.InfoBox>

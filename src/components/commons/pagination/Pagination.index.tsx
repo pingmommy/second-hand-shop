@@ -1,26 +1,20 @@
-import { useState, type MouseEvent } from "react";
+import { useState } from "react";
 import * as S from "./Pagination.styles";
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../commons/types/generated/types";
-import type { ApolloQueryResult } from "@apollo/client";
-
 interface IPaginationProps {
-  refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
+  handlePage: (page: number) => void;
   lastPage: number;
+  activePage: number;
 }
 
 export default function Pagination({
-  refetch,
+  handlePage,
   lastPage,
+  activePage,
 }: IPaginationProps): JSX.Element {
   const [startPage, setStartPage] = useState(1);
 
-  const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
-    void refetch({ page: Number(event.currentTarget.id) });
+  const onClickPage = (page: number) => (): void => {
+    handlePage(page);
   };
 
   const onClickPrevPage = (): void => {
@@ -28,13 +22,13 @@ export default function Pagination({
       return;
     }
     setStartPage(startPage - 10);
-    void refetch({ page: startPage - 10 });
+    handlePage(startPage - 10);
   };
 
   const onClickNextPage = (): void => {
     if (startPage + 10 <= lastPage) {
       setStartPage(startPage + 10);
-      void refetch({ page: startPage + 10 });
+      handlePage(startPage + 10);
     }
   };
 
@@ -46,8 +40,8 @@ export default function Pagination({
           index + startPage <= lastPage && (
             <S.page
               key={index + startPage}
-              id={String(index + startPage)}
-              onClick={onClickPage}
+              onClick={onClickPage(index + startPage)}
+              isActive={index + startPage === activePage}
             >
               {index + startPage}
             </S.page>

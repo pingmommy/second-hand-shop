@@ -26,7 +26,7 @@ export const WriteBtn = styled.button`
 `;
 
 export const WriteText = styled.span`
-  /* font-weight: 600; */
+  font-weight: 600;
 `;
 
 export const WriteIcon = styled(EditOutlined)`

@@ -14,6 +14,8 @@ import dynamic from "next/dynamic";
 import { CardWrapper } from "../../../commons/ui/wrapper/wrapper";
 import { useCreateUsedItem } from "../../../commons/hooks/customs/useCreateUsedItem";
 import { useUpdateUsedItem } from "../../../commons/hooks/customs/useUpdateUsedItem";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./ProductWrite.ValidationSchema";
 
 const MyQuillEditor = dynamic(
   async () => await import("../../../commons/editor"),
@@ -30,6 +32,7 @@ export default function ProductWrite({
   prevData,
 }: IProdWriteProps): JSX.Element {
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
+
   const [userAddress, setUserAddress] = useState({
     address: prevData?.fetchUseditem.useditemAddress?.address ?? "",
     zipcode: prevData?.fetchUseditem.useditemAddress?.zipcode ?? "",
@@ -40,14 +43,16 @@ export default function ProductWrite({
 
   const {
     handleSubmit,
+    getValues,
     setValue,
     register,
-    formState: { dirtyFields },
+    formState: { dirtyFields, isValid, errors },
   } = useForm<ICreateUseditemInput>({
+    resolver: yupResolver(schema),
     defaultValues: {
       name: prevData?.fetchUseditem.name ?? "",
       remarks: prevData?.fetchUseditem.remarks ?? "",
-      price: prevData?.fetchUseditem.price ?? 0,
+      price: prevData?.fetchUseditem.price ?? undefined,
       tags: prevData?.fetchUseditem.tags,
     },
   });
@@ -65,7 +70,8 @@ export default function ProductWrite({
 
   const setImageUrl = (selectedImage: string[]): void => {
     setImageUrls([...selectedImage]);
-    setValue("images", [...selectedImage], { shouldDirty: true });
+    const filteredUrls = selectedImage.filter((el) => el !== "");
+    setValue("images", [...filteredUrls], { shouldDirty: true });
   };
 
   const setContents = (contents: string): void => {
@@ -105,20 +111,21 @@ export default function ProductWrite({
           register={register("price")}
           title="판매가격"
         />
+
         <Input01
           placeholder="#태그 #태그 #태그"
-          register={register("tags")}
           title="태그입력"
+          register={register("tags.0")}
         />
-
         <MyMap address={userAddress.address} />
         <Postcode02 setAddress={setAddress} userAddress={userAddress} />
         <ImageSelector02 imageUrls={imageUrls} setImageUrl={setImageUrl} />
-        <Button01 isEdit={isEdit} />
+        <Button01 isEdit={isEdit} isValid={isValid} />
       </form>
       <button
         onClick={() => {
-          console.log(dirtyFields);
+          console.log(errors);
+          console.log(getValues("images"));
         }}
       >
         click

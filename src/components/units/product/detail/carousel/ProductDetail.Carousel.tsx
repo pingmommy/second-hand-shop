@@ -56,7 +56,6 @@ export default function Carousel({
       <S.slickThumb>
         <Slider {...settings}>
           {filteredImages?.map((image, idx) => {
-            console.log(idx, image);
             return (
               <div key={idx}>
                 <img

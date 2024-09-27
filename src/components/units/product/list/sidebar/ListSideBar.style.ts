@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { PrimaryColorBtn } from "../../../../commons/ui/button/02";
 
 export const SideWrapper = styled.aside`
   height: 25rem;
@@ -29,21 +30,18 @@ export const SideImgBox = styled.div`
   width: 80%;
   height: 6.5rem;
   margin-bottom: 1rem;
+  position: relative;
 `;
 
-export const RegisterProdBtn = styled.a`
-  display: block;
+export const RegisterProdBtn = styled(PrimaryColorBtn)`
   width: 100%;
-  color: var(--color-grey-700);
-  /* background-color: var(--color-primary-600); */
-  text-align: center;
-  font-weight: 600;
-  border: 2px solid var(--color-primary-600);
-  border-radius: 2px;
-  padding: 0.6rem 0;
   margin-top: 1rem;
-  cursor: pointer;
-  :hover {
-    background-color: rgb(251 206 68);
-  }
+`;
+
+export const Page = styled.div`
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  color: var(--color-grey-500);
 `;

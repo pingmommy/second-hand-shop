@@ -23,3 +23,29 @@ export const useLogIn = create<LogInState>((set) => ({
     set((state) => ({ isLoggedIn: logIn }));
   },
 }));
+
+interface OpenState {
+  isOpen: boolean;
+  setIsOpen: (logIn: boolean) => void;
+}
+
+export const useOpen = create<OpenState>((set) => ({
+  isOpen: false,
+  setIsOpen: (Open) => {
+    set((state) => ({ isOpen: Open }));
+  },
+}));
+
+interface PageState {
+  page: string;
+  setPage: (currentPage: string) => void;
+}
+
+export const usePage = create<PageState>((set) => ({
+  page: "market",
+  setPage: (currentPage) => {
+    set((state) => ({
+      page: currentPage,
+    }));
+  },
+}));

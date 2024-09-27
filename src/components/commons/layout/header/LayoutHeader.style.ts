@@ -27,8 +27,12 @@ export const NavLink = styled.a`
   display: inline-block;
   text-decoration: none;
   padding: 0.5rem 1.2rem;
-  color: var(--color-grey-700);
+  color: ${({ isActive }: { isActive?: boolean }) =>
+    (isActive ?? false) ? "rgb(248 199 45)" : "var(--color-grey-700);"};
   cursor: pointer;
+  :hover {
+    color: var(--color-primary-600);
+  }
 `;
 
 export const SignInLink = styled.a`

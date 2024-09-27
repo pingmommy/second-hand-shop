@@ -8,16 +8,14 @@ interface ISearchProps {
   onSearch: (value: string) => void;
   isSelected: string;
   setIsSelected: Dispatch<SetStateAction<string>>;
+  isHidden?: boolean;
 }
 
 //  전체 wrapper 너비는 부모컴포넌트에서 설정하기!(layout에 맞게)
 export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
-  const { isSelected, list, onSearch, setIsSelected } = props;
+  const { isSelected, list, onSearch, setIsSelected, isHidden } = props;
 
   const onClickCategory = (category: string) => (): void => {
-    if (category === "isSoldOut") {
-      console.log("!!!");
-    }
     setIsSelected(category);
   };
 
@@ -41,14 +39,17 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
           )
         )}
       </S.ButtonWrapper>
-
-      <S.SearchBar>
-        <S.SearchIcon />
-        <S.SearchInput
-          placeholder="제목을 검색하세요."
-          onChange={onChangeKeyword}
-        />
-      </S.SearchBar>
+      {(isHidden ?? false) ? (
+        <></>
+      ) : (
+        <S.SearchBar>
+          <S.SearchIcon />
+          <S.SearchInput
+            placeholder="제목을 검색하세요."
+            onChange={onChangeKeyword}
+          />
+        </S.SearchBar>
+      )}
     </>
   );
 }

@@ -6,7 +6,6 @@ export const BtnWrapper = styled.div`
 `;
 
 export const WriteBtn = styled.button`
-  background-color: var(--color-primary-600);
   border: none;
   padding: 10px 30px;
   border-radius: 3px;
@@ -14,16 +13,23 @@ export const WriteBtn = styled.button`
   font-size: 1rem;
   color: var(--color-grey-700);
   font-family: "NanumGothicCoding-Bold", sans-serif;
-  :hover {
-    background-color: rgb(251 206 68);
-  }
+  cursor: pointer;
+  background-color: ${({ isValid }: { isValid: boolean }) =>
+    isValid ? "var(--color-primary-600);" : "var(--color-grey-100);"};
 `;
 
-export const Button01 = ({ isEdit }: { isEdit: boolean }): JSX.Element => {
+interface IButton01 {
+  isEdit: boolean;
+  isValid: boolean;
+}
+
+export const Button01 = ({ isEdit, isValid }: IButton01): JSX.Element => {
   return (
     <>
       <BtnWrapper>
-        <WriteBtn type="submit">{isEdit ? "수정하기" : "등록하기"}</WriteBtn>
+        <WriteBtn type="submit" isValid={isValid}>
+          {isEdit ? "수정하기" : "등록하기"}
+        </WriteBtn>
       </BtnWrapper>
     </>
   );

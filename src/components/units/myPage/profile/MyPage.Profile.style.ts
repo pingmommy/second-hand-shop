@@ -9,7 +9,7 @@ export const ProfileTitle = styled.h2`
 `;
 
 export const ProfileInnerWrapper = styled.section`
-  padding-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
   display: flex;
 `;
 
@@ -30,6 +30,10 @@ export const ProfileInput = styled.input`
   border-radius: 4px;
   height: 3rem;
   width: 30rem;
+  :focus {
+    border-color: var(--color-primary-6);
+    outline: none;
+  }
 `;
 
 export const BtnWrapper = styled.section`

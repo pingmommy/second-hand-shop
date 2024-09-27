@@ -8,12 +8,14 @@ import Carousel from "./carousel/ProductDetail.Carousel";
 import ProductDetailFooter from "./footer/ProductDetailFooter.index";
 import { useRouterIdChecker } from "../../../commons/hooks/customs/useRouterIdChecker";
 import { useMutationUsedItemPick } from "../../../commons/hooks/mutations/useMutationUsedItemPick";
+import { SettingTodayView } from "./settingTodayView";
 
 export default function ProductDetail(): JSX.Element {
   const { id } = useRouterIdChecker("borrdId");
   const { data } = useQueryFetchUsedItem(id);
   const { handleToggleUsedItemPick } = useMutationUsedItemPick();
 
+  SettingTodayView(data, id);
   const handleIPick = (): void => {
     void handleToggleUsedItemPick(id);
   };

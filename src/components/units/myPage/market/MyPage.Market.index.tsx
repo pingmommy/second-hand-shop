@@ -12,9 +12,9 @@ const BTN_LIST = [
 ];
 
 export default function MyMarket({ page }: any): JSX.Element {
-  const { data: IPickData, refetch } = useQueryFetchUseditemsIPicked(1, "");
-  const { data } = useQueryFetchUseditemsISold(1, "");
-
+  const { data: IPickData } = useQueryFetchUseditemsIPicked(1, "");
+  const { data, refetch } = useQueryFetchUseditemsISold(1, "");
+  const [activePage, setActivePage] = useState(1);
   const [isSelected, setIsSelected] = useState(BTN_LIST[0].id);
 
   const [keyword, setKeyword] = useState("");
@@ -22,6 +22,11 @@ export default function MyMarket({ page }: any): JSX.Element {
   const handleKeyword = (value: string): void => {
     setKeyword(value);
     void refetch({ search: value, page: 1 });
+  };
+
+  const handlePage = (page: number): void => {
+    setActivePage(page);
+    void refetch({ search: "", page });
   };
 
   return (
@@ -34,7 +39,13 @@ export default function MyMarket({ page }: any): JSX.Element {
           setIsSelected={setIsSelected}
         />
       </S.PageHeader>
-      {isSelected === "myProduct" && <MyProduct data={data} />}
+      {isSelected === "myProduct" && (
+        <MyProduct
+          data={data}
+          handlePage={handlePage}
+          activePage={activePage}
+        />
+      )}
       {isSelected === "pick" && <MyPick data={IPickData} />}
     </>
   );

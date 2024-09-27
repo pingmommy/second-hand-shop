@@ -22,6 +22,7 @@ export default function BoardDetailMain(): JSX.Element {
   const { id } = useRouterIdChecker("boardId");
 
   const { data } = useQueryFetchBoard(id);
+  console.log(data, id);
   return (
     <>
       <Wrapper>

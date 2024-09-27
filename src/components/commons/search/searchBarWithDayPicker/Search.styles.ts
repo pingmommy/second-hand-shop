@@ -68,6 +68,6 @@ export const SearchBtn = styled.button`
   font-size: 0.9rem;
   cursor: pointer;
   :hover {
-    background-color: rgb(252 195 19);
+    background-color: var(--color-grey-700);
   }
 `;

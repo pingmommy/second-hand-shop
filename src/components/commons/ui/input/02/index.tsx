@@ -34,6 +34,7 @@ interface IInput02Props {
   placeholder?: string;
   register?: UseFormRegisterReturn;
   type?: "text" | "password";
+  errMessage: string | undefined;
 }
 
 // 좁은 곳에 사용하는 input타입
@@ -42,6 +43,7 @@ export const Input02 = ({
   placeholder,
   register,
   type,
+  errMessage,
 }: IInput02Props): JSX.Element => {
   return (
     <>
@@ -53,7 +55,7 @@ export const Input02 = ({
           placeholder={placeholder}
           {...register}
         />
-        <Error>{""}</Error>
+        <Error>{errMessage}</Error>
       </InnerWrapper>
     </>
   );

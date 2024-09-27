@@ -10,8 +10,8 @@ const FETCH_USED_ITEMS_I_SOLD = gql`
     fetchUseditemsISold(search: $search, page: $page) {
       _id
       name
-      remarks
-      contents
+      price
+      createdAt
     }
   }
 `;

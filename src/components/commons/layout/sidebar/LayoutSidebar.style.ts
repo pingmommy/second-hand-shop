@@ -3,8 +3,8 @@ import { Avatar } from "@mui/material";
 
 export const SidebarInnerWrapper = styled.div`
   width: 10rem;
-
-  border-right: 2px solid var(--color-grey-300);
+  height: 100%;
+  border-right: 2px solid var(--color-grey-100);
   padding: 2rem 0;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import styled from "@emotion/styled";
-import { GhostButton } from "../../commons/ui/button/02";
+import { GhostButton, PrimaryColorBtn } from "../../commons/ui/button/02";
+import { Radio } from "antd";
 
 export const PageHeader = styled.header`
   width: 100%;
@@ -60,4 +61,23 @@ export const TColum_title = styled.a`
 
 export const Keyword = styled.span`
   color: red;
+`;
+
+export const MyRadioWrapper = styled.section`
+  margin: 1.5rem 0 2rem 0;
+`;
+
+export const MyRadio = styled(Radio)`
+  border: 1px solid var(--color-grey-300);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin: 0;
+  :focus-within {
+    border-color: var(--color-primary-600);
+  }
+`;
+
+export const LoadPointBtn = styled(PrimaryColorBtn)`
+  width: 100%;
+  height: 2.5rem;
 `;

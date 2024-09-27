@@ -4,15 +4,32 @@ import * as S from "./LoggedIn.style";
 import { MyIcon } from "../../../ui/icon/MyIcon.index";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import { useMutationLogoutUser } from "../../../hooks/mutations/useMutationLogoutUser";
-import { useCreatePointTransactionOfLoading } from "../../../hooks/customs/useCreatePointTransactionOfLoading";
+import { useMoveToPage } from "../../../hooks/customs/useMoveToPage";
+import { useOpen, usePage } from "../../../../../commons/stores";
+import { useState } from "react";
 
 interface ILoggedInProps {
   data: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
 }
 
 export default function LoggedInHeader({ data }: ILoggedInProps): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const setPage = usePage((state) => state.setPage);
+  const setIsOpen = useOpen((state) => state.setIsOpen);
   const { onClickLogoutUser } = useMutationLogoutUser();
-  const { chargingPoint } = useCreatePointTransactionOfLoading();
+
+  const { onClickMoveToPage } = useMoveToPage();
+
+  const moveToLoadPoint = (): void => {
+    setPage("point");
+    setIsOpen(true);
+    setOpen(false);
+    onClickMoveToPage("/myPage")();
+  };
+
+  const handleOpenChange = (newOpen: boolean): void => {
+    setOpen(newOpen);
+  };
   const content = (
     <aside>
       <S.UserInfoWrapper>
@@ -24,7 +41,7 @@ export default function LoggedInHeader({ data }: ILoggedInProps): JSX.Element {
           </S.UserInfoItem>
         </S.UserInfo>
       </S.UserInfoWrapper>
-      <S.MenuItem onClick={chargingPoint}>
+      <S.MenuItem onClick={moveToLoadPoint}>
         <MyIcon iconName="savings" />
         <S.MenuText>충전하기</S.MenuText>
       </S.MenuItem>
@@ -36,11 +53,23 @@ export default function LoggedInHeader({ data }: ILoggedInProps): JSX.Element {
   );
 
   return (
-    <Popover content={content} trigger="click">
-      <Avatar size="large" icon={<UserOutlined />} />
-      <S.ToggleBox>
-        <CaretDownOutlined />
-      </S.ToggleBox>
-    </Popover>
+    <>
+      <Popover
+        content={content}
+        trigger="click"
+        open={open}
+        onOpenChange={handleOpenChange}
+        placement="bottomRight"
+      >
+        <Avatar size="large" icon={<UserOutlined />} />
+        <S.ToggleBox
+          onClick={() => {
+            setOpen((prev) => !prev);
+          }}
+        >
+          <CaretDownOutlined />
+        </S.ToggleBox>
+      </Popover>
+    </>
   );
 }

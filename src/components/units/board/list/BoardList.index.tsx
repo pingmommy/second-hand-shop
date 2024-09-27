@@ -10,12 +10,18 @@ import Search from "../../../commons/search/searchBarWithDayPicker/Search.index"
 
 export default function BoardList(): JSX.Element {
   const [keyword, setKeyword] = useState("");
+  const [activePage, setActivePage] = useState(1);
 
   const { data, refetch } = useQueryFetchBoards();
 
   const { data: BoardCount } = useQueryFetchBoardsCount();
 
   const lastPage = Math.ceil((BoardCount?.fetchBoardsCount ?? 10) / 10);
+
+  const refetchBoards = (page: number): void => {
+    setActivePage(page);
+    void refetch({ page });
+  };
 
   return (
     <>
@@ -25,7 +31,11 @@ export default function BoardList(): JSX.Element {
 
       <BoardListBody data={data} keyword={keyword}></BoardListBody>
       <S.Footer>
-        <Pagination refetch={refetch} lastPage={lastPage} />
+        <Pagination
+          handlePage={refetchBoards}
+          lastPage={lastPage}
+          activePage={activePage}
+        />
         <Link href={"/freeBoard/new"}>
           <S.WriteBtn>
             <S.WriteText>글쓰기</S.WriteText> <S.WriteIcon />

@@ -3,12 +3,23 @@ import * as S from "./LayoutHeader.style";
 import { useLogIn } from "../../../../commons/stores";
 import LoggedInHeader from "./loggedIn/LoggedIn.index";
 import { useQueryFetchUserLoggedIn } from "../../hooks/queries/useQueryFetchUserLoggedIn";
+import { useState } from "react";
+
+const NAV_LIST = [
+  { href: "/freeBoard", name: "자유게시판" },
+  { href: "/productShop", name: "중고마켓" },
+  { href: "/myPage", name: "마이페이지" },
+];
 
 export default function LayoutHeader(): JSX.Element {
   const isLoggedIn = useLogIn((state) => state.isLoggedIn);
+  const [activePage, setActivePage] = useState(0);
 
   const { data } = useQueryFetchUserLoggedIn();
-  console.log(data);
+
+  const aa = (idx: number) => () => {
+    setActivePage(idx);
+  };
 
   return (
     <>
@@ -17,15 +28,13 @@ export default function LayoutHeader(): JSX.Element {
           <Link href="/freeBoard">
             <S.Logo>SecondHand</S.Logo>
           </Link>
-          <Link href="/freeBoard">
-            <S.NavLink>자유게시판</S.NavLink>
-          </Link>
-          <Link href="/productShop">
-            <S.NavLink>중고마켓</S.NavLink>
-          </Link>
-          <Link href="/myPage">
-            <S.NavLink>마이페이지</S.NavLink>
-          </Link>
+          {NAV_LIST.map((el, idx) => (
+            <Link href={el.href} key={el.href}>
+              <S.NavLink isActive={idx === activePage} onClick={aa(idx)}>
+                {el.name}
+              </S.NavLink>
+            </Link>
+          ))}
         </S.InnerWrapper>
         {isLoggedIn ? (
           <div style={{ marginRight: "6rem" }}>

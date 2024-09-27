@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductListHeader from "./header/ProductListHeader.index";
 import { useQueryFetchUsedItems } from "../../../commons/hooks/queries/useQueryFetchUsedItems";
 import ListItemCard from "./card/List-ItemCard.index";
@@ -15,11 +15,22 @@ const LIST = [
 
 export default function ProductList(): JSX.Element {
   const [keyword, setKeyword] = useState("");
-  const [isSoldout, setIsSoldout] = useState(false);
-  const [isSelected, setIsSelected] = useState("");
+  const [isSelected, setIsSelected] = useState("onSale");
   const [page, setPage] = useState(1);
 
   const { data, fetchMore, loading, refetch } = useQueryFetchUsedItems();
+
+  const aa = (): void => {
+    if (isSelected === "isSoldOut") {
+      void refetch({ isSoldout: true });
+    } else {
+      void refetch({ isSoldout: false });
+    }
+  };
+
+  useEffect(() => {
+    aa();
+  }, [isSelected]);
 
   const loadMoreUsedItem = (): void => {
     if (loading) return;
@@ -43,7 +54,7 @@ export default function ProductList(): JSX.Element {
 
   const handleKeyword = (value: string): void => {
     setKeyword(value);
-    void refetch({ search: value, page: 1, isSoldout });
+    void refetch({ search: value });
   };
 
   return (

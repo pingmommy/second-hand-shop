@@ -30,7 +30,7 @@ const Error = styled.p`
 interface IInput01Props {
   title: string;
   placeholder?: string;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
 }
 
 export const Input01 = ({

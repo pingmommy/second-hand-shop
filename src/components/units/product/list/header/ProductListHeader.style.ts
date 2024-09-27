@@ -20,12 +20,14 @@ export const InnerWrapper = styled.div`
   padding: 1rem 0;
 `;
 
-export const ContentCard = styled.div`
+export const ContentCard = styled.a`
+  display: inline-block;
   width: 100%;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 2px 4px 8px;
   overflow: hidden;
   padding-bottom: 1rem;
+  cursor: pointer;
 `;
 
 export const ImgBox = styled.div`

@@ -3,12 +3,13 @@ import styled from "@emotion/styled";
 export const PrimaryColorBtn = styled.button`
   background-color: var(--color-primary-600);
   border: none;
-  padding: 10px 30px;
+  padding: 0.8rem 2rem;
   border-radius: 3px;
   font-weight: 500;
   font-size: 1rem;
   color: var(--color-grey-700);
   font-family: "NanumGothicCoding-Bold", sans-serif;
+  cursor: pointer;
   :hover {
     background-color: rgb(251 206 68);
   }

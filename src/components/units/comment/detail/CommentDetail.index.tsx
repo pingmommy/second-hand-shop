@@ -5,6 +5,8 @@ import CommentWrite from "../../../units/comment/write/CommentWrite.index";
 import { getDate } from "../../../../commons/libraries/getDate";
 import type { IBoardComment } from "../../../../commons/types/generated/types";
 import { useDeleteBoardComment } from "../../../commons/hooks/customs/useDeleteBoardComment";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 interface ICommentDetailProps {
   data: IBoardComment;
   id: string;
@@ -57,9 +59,7 @@ export default function CommentDetail({
               <S.DeletePassword type="password" onChange={onChangePassword} />
             </S.DeleteModal>
           )}
-          <S.Avatar>
-            <img src="/icons/avatar.png" />
-          </S.Avatar>
+          <Avatar size="large" icon={<UserOutlined />} />
           <S.TextWrapper>
             <S.Writer>{data.writer}</S.Writer>
             <S.Contents>{data.contents}</S.Contents>

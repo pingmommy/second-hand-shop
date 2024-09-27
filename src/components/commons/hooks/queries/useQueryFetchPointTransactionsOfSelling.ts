@@ -13,7 +13,11 @@ const FETCH_POINT_TRANSACTIONS_OF_SELLING = gql`
       _id
       amount
       balance
-      status
+      useditem {
+        _id
+        name
+        soldAt
+      }
     }
   }
 `;
