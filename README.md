@@ -9,6 +9,8 @@
 
 
 🌐 소개페이지 링크 : 
+
+
 ⚠️ 백엔드 API 외부노출이 차단되어 있어, 프로젝트 소개 페이지로 프로젝트 사이트를 대신합니다.
 
 
@@ -64,5 +66,23 @@
   <div>우후후후</div>
   <!-- 내용 -->
 </details>
+![mypage (1)](f)
+![market (1)]()
 
-## 
+
+
+<br/><br/>
+
+## ✏️ 대표이미지
+
+**자유게시판**
+<img width='100%' src='https://github.com/user-attachments/assets/2a84811b-97b8-44b6-85b6-0a0d67343b85'/>
+
+
+**중고마켓**
+<img width='100%' src='https://github.com/user-attachments/assets/76ea09b5-4bc2-4799-9777-eafa4e5c7205'/>
+
+
+**마이페이지**
+<img width='100%' src='https://github.com/user-attachments/assets/6e36bd9b-c448-411d-8e2f-45a921d3222'/>
+
