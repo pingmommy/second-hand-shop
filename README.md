@@ -7,10 +7,8 @@
 로그인, 권한분기, 결제 등 추가적인 기능으로 게시판을 고도화한 **중고마켓**을 구현한 프로젝트입니다. 
 
 
-
-🌐 소개페이지 링크 : 
-
-
+<br/>
+🌐 소개페이지 링크 : https://pingmommy.github.io/intro_SHS/
 ⚠️ 백엔드 API 외부노출이 차단되어 있어, 프로젝트 소개 페이지로 프로젝트 사이트를 대신합니다.
 
 
@@ -77,14 +75,17 @@
 
 ## ✏️ 대표이미지
 
+<br/>
 **자유게시판**
 <img width='100%' src='https://github.com/user-attachments/assets/33aa6f80-5e9a-43d0-9a37-e281d9058034'/>
 
 
+<br/>
 **중고마켓**
 <img width='100%' src='https://github.com/user-attachments/assets/42964b9d-ba22-4d51-ac43-021dd21b1f91'/>
 
 
+<br/>
 **마이페이지**
 <img width='100%' src='https://github.com/user-attachments/assets/63eca418-07a2-4548-9936-2cac9c14638f'/>
 
