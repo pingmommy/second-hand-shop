@@ -13,9 +13,26 @@
 
 
 <br/>
+> [!NOTE]
+> 백엔드 API 외부노출이 차단되어 있어, 프로젝트 소개 페이지로 프로젝트 사이트를 대신합니다.
 
-⚠️ 백엔드 API 외부노출이 차단되어 있어, 프로젝트 소개 페이지로 프로젝트 사이트를 대신합니다.
 
+###Version
+```
+next 12.1.0
+react: 17.0.2
+react-dom: 17.0.2
+typescript: ^4.8.4
+types/node: 17.0.2
+types/react: 17.0.2
+apollo/client: ^3.6.9
+emotion/styled: ^11.10.0
+material-ui/core: 4.12.4
+antd: ^4.22.8
+eslint: ^8.0.1
+prettier: 2.7.1
+
+```
 
 <br/><br/>
 
