@@ -66,8 +66,10 @@
   <div>우후후후</div>
   <!-- 내용 -->
 </details>
-![mypage (1)](f)
-![market (1)]()
+
+
+
+
 
 
 
@@ -76,13 +78,13 @@
 ## ✏️ 대표이미지
 
 **자유게시판**
-<img width='100%' src='https://github.com/user-attachments/assets/2a84811b-97b8-44b6-85b6-0a0d67343b85'/>
+<img width='100%' src='https://github.com/user-attachments/assets/33aa6f80-5e9a-43d0-9a37-e281d9058034'/>
 
 
 **중고마켓**
-<img width='100%' src='https://github.com/user-attachments/assets/76ea09b5-4bc2-4799-9777-eafa4e5c7205'/>
+<img width='100%' src='https://github.com/user-attachments/assets/42964b9d-ba22-4d51-ac43-021dd21b1f91'/>
 
 
 **마이페이지**
-<img width='100%' src='https://github.com/user-attachments/assets/6e36bd9b-c448-411d-8e2f-45a921d3222'/>
+<img width='100%' src='https://github.com/user-attachments/assets/63eca418-07a2-4548-9936-2cac9c14638f'/>
 
