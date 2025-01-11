@@ -270,10 +270,130 @@ const MyQuillEditor = dynamic(
 
 <details>
   <summary>페이지네이션과 무한스크롤</summary>
-  <div>우후후후</div>
-  <!-- 내용 -->
-</details>
 
+
+<br/>
+
+ ```JavaScript
+
+// 페이지네이션
+
+import { useState } from "react";
+import * as S from "./Pagination.styles";
+
+
+export default function Pagination({
+  handlePage,
+  lastPage,
+  activePage,
+}: IPaginationProps): JSX.Element {
+  const [startPage, setStartPage] = useState(1);
+
+  const onClickPage = (page: number) => (): void => {
+    handlePage(page);
+  };
+
+  const onClickPrevPage = (): void => {
+    if (startPage === 1) {
+      return;
+    }
+    setStartPage(startPage - 10);
+    handlePage(startPage - 10);
+  };
+
+  const onClickNextPage = (): void => {
+    if (startPage + 10 <= lastPage) {
+      setStartPage(startPage + 10);
+      handlePage(startPage + 10);
+    }
+  };
+
+  return (
+    <S.Pagination>
+      <S.page onClick={onClickPrevPage}>&lt;</S.page>
+      {new Array(10).fill(0).map(
+        (_, index) =>
+          index + startPage <= lastPage && (
+            <S.page
+              key={index + startPage}
+              onClick={onClickPage(index + startPage)}
+              isActive={index + startPage === activePage}
+            >
+              {index + startPage}
+            </S.page>
+          )
+      )}
+      <S.page onClick={onClickNextPage}>&gt;</S.page>
+    </S.Pagination>
+  );
+}
+
+
+
+```
+
+
+<br/>
+
+
+ ```JavaScript
+
+// 무한스크롤
+
+import { useQueryFetchBoardComments } from "../../../commons/hooks/queries/useQueryFetchBoardComments";
+import CommentDetail from "../detail/CommentDetail.index";
+import InfiniteScroll from "react-infinite-scroller";
+
+
+export default function CommentList({ id }: ICommentListProps): JSX.Element {
+  const { data, fetchMore } = useQueryFetchBoardComments(id);
+
+  const LoadMoreBoardComment = (): void => {
+    void fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
+  return (
+    <>
+      {data?.fetchBoardComments !== undefined &&
+        data?.fetchBoardComments.length > 0 && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={LoadMoreBoardComment}
+            hasMore={true}
+          >
+            {data?.fetchBoardComments?.map((el, index) => (
+              <CommentDetail key={index} data={el} id={id} />
+            ))}
+          </InfiniteScroll>
+        )}
+    </>
+  );
+}
+
+
+
+```
+
+
+<br/>
+
+
+</details>
 
 <details>
   <summary>CSS in JS로 스타일링</summary>
