@@ -217,11 +217,12 @@ export default function MyMap({ address }: IMyMapProps): JSX.Element {
 
 // 웹 에디터
 
-src\components\commons\editor\index.tsx
+
 
 export default function MyQuillEditor(props: IProps): JSX.Element {
 ...
 
+// html 태그를 넣기 때문에 sanitizing 중요!
   const clean = DOMPurify.sanitize(props.data);
   return (
     <InnerWrapper>
@@ -238,10 +239,10 @@ export default function MyQuillEditor(props: IProps): JSX.Element {
 
 // 적용
 
-src\components\units\product\write\ProductWrite.index.tsx
 
 export default function ProductWrite(): JSX.Element {
 
+// ssr:false  옵션 중요! 서버에서 렌더링시 에러방지
 const MyQuillEditor = dynamic(
   async () => await import("../../../commons/editor"),
   { ssr: false }
