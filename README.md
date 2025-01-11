@@ -47,23 +47,9 @@ prettier: 2.7.1
   <summary>디바운싱을 적용한 검색</summary>
 
 
- ```
-export default function ProductList(): JSX.Element { 
-  
-const handleKeyword = (value: string): void => {
-    setKeyword(value);
-    void refetch({ search: value });
-  };
+ ``` react
+import _ from "lodash";
 
-  return (
-    <>
-        ...
-        <SearchBarWithBtn
-          onSearch={handleKeyword}
-        ...
-        />
-  ...
-)}
 export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
  const debounce = _.debounce((value: string) => {
    props.onSearch(value);
