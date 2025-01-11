@@ -135,9 +135,11 @@ import { useRouter } from "next/router";
 
 export const useAuth = (): void => {
   const router = useRouter();
-  const accessToken = useAccessToken((state) => state.accessToken);
 
-  console.log(accessToken);
+
+// zustand를 활용한 globalstate 사용
+
+  const accessToken = useAccessToken((state) => state.accessToken);
 
   useEffect(() => {
     if (accessToken === "") {
@@ -172,8 +174,96 @@ export default function myPagePage(): JSX.Element {
 
 <details>
   <summary>카카오 지도 및 웹 에디터</summary>
-  <div>우후후후</div>
-  <!-- 내용 -->
+
+<br/>
+
+ ```JavaScript
+
+// 지도
+
+
+//에러방지를 위한 타입선언 (kakao)
+declare const window: typeof globalThis & { kakao: any };
+
+export default function MyMap({ address }: IMyMapProps): JSX.Element {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js? ... ";
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.kakao.maps.load(() => { ... }
+}
+      
+   
+  }, [address]);
+
+  return (   
+      <div id="map" style={{ width: "100%", height: "400px" }}></div>    
+  );
+}
+
+
+```
+
+
+
+<br/>
+
+
+ ```JavaScript
+
+// 웹 에디터
+
+src\components\commons\editor\index.tsx
+
+export default function MyQuillEditor(props: IProps): JSX.Element {
+...
+
+  const clean = DOMPurify.sanitize(props.data);
+  return (
+    <InnerWrapper>
+      <Title>상품설명</Title>
+      <div
+        ref={editorRef}
+        dangerouslySetInnerHTML={{ __html: clean }}
+      />
+    </InnerWrapper>
+  );
+}
+
+
+
+// 적용
+
+src\components\units\product\write\ProductWrite.index.tsx
+
+export default function ProductWrite(): JSX.Element {
+
+const MyQuillEditor = dynamic(
+  async () => await import("../../../commons/editor"),
+  { ssr: false }
+);
+
+  return (
+...
+  <MyQuillEditor
+          setContents={setContents}
+          data={prevData?.fetchUseditem.contents ?? ""}
+        />
+
+...
+  );
+}
+
+
+```
+
+<br/>
+
+
 </details>
 
 
