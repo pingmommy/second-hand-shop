@@ -98,16 +98,77 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
 
 
 <details>
-  <summary>GraphQL을 활용한 데이터 통신</summary>
-  <div>우후후후</div>
-  <!-- 내용 -->
+  <summary>CSS in JS로 스타일링</summary>
+
+<br/>
+
+ ```JavaScript
+import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
+
+export const YoutubeWrapper = styled.div`
+  width: 100%;
+  height: 25rem;
+  position: relative;
+  overflow: hidden;
+`;
+
+export const Youtube = styled(ReactPlayer)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+```
+
+
+<br/>
+
+
 </details>
 
 
 <details>
-  <summary>CSS in JS로 스타일링</summary>
-  <div>우후후후</div>
-  <!-- 내용 -->
+  <summary>GraphQL을 활용한 데이터 통신 </summary>
+
+<br/>
+
+ ```JavaScript
+import { gql, useMutation } from "@apollo/client";
+import type { ... } from "../../../../commons/types/generated/types";
+
+export const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      writer
+      _id
+    }
+  }
+`;
+
+export const useMutationCreateBoard = (): MutationTuple<
+  Pick<IMutation, "createBoard">,
+  IMutationCreateBoardArgs,
+  DefaultContext,
+  ApolloCache<any>
+> => {
+  const mutation = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+
+  return mutation;
+};
+
+
+```
+
+
+<br/>
+
+
 </details>
 
 
