@@ -78,8 +78,82 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
 
 <details>
   <summary>JWT방식의 로그인과 권한 분기</summary>
-  <div>우후후후</div>
-  <!-- 내용 -->
+
+<br/>
+
+ ```JavaScript
+
+// 로그인 \src\components\units\logIn\LogIn.index.tsx
+
+
+export default function LogIn(): JSX.Element {
+  const router = useRouter();
+
+  const [loginUser] = useMutationLoginUser();
+
+// zustand를 활용한 globalstate 사용
+  const setAccessToken = useAccessToken((state) => state.setToken);
+  const setLoggedIn = useLogIn((state) => state.setIsLoggedIn);
+
+  const handleLogin = async (data: IMutationLoginUserArgs): Promise<void> => {
+    try {
+      const result = await loginUser({ variables: { ...data } });
+      setAccessToken(result?.data?.loginUser.accessToken ?? "");
+      void router.push("/productShop");
+      setLoggedIn(true);
+    } catch (err) {
+      if (err instanceof Error) {
+        Modal.info({ content: err.message });
+      }
+    }
+  };
+
+  return (  ... );
+}
+
+```
+
+
+<br/>
+
+ ```JavaScript
+
+// 권한분기
+
+import { useEffect } from "react";
+import { useAccessToken } from "../../../../commons/stores";
+
+import { useRouter } from "next/router";
+
+export const useAuth = (): void => {
+  const router = useRouter();
+  const accessToken = useAccessToken((state) => state.accessToken);
+
+  console.log(accessToken);
+
+  useEffect(() => {
+    if (accessToken === "") {
+      void router.push("/logIn");
+    }
+  }, []);
+};
+
+// mypage에 적용
+
+export default function myPagePage(): JSX.Element {
+
+...
+
+  useAuth();
+  return ( ...  );
+}
+
+```
+
+
+<br/>
+
+
 </details>
 
 
