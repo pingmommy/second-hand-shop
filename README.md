@@ -46,6 +46,7 @@ prettier: 2.7.1
 <details>
   <summary>디바운싱을 적용한 검색</summary>
 
+<br/>
 
  ```JavaScript
 import _ from "lodash";
@@ -55,7 +56,11 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
    props.onSearch(value);
   }, 500);
 
-... }
+...
+}
+
+<br/>
+
 
 ```
 </details>
