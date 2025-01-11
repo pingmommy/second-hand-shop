@@ -47,7 +47,7 @@ prettier: 2.7.1
   <summary>디바운싱을 적용한 검색</summary>
 
 
- ``` react
+ ```JavaScript
 import _ from "lodash";
 
 export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
