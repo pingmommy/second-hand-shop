@@ -139,25 +139,24 @@ export const Youtube = styled(ReactPlayer)`
 import { gql, useMutation } from "@apollo/client";
 import type { ... } from "../../../../commons/types/generated/types";
 
-export const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      writer
-      _id
+const LOG_IN = gql`
+  mutation loginUser($password: String!, $email: String!) {
+    loginUser(password: $password, email: $email) {
+      accessToken
     }
   }
 `;
 
-export const useMutationCreateBoard = (): MutationTuple<
-  Pick<IMutation, "createBoard">,
-  IMutationCreateBoardArgs,
+export const useMutationLoginUser = (): MutationTuple<
+  Pick<IMutation, "loginUser">,
+  IMutationLoginUserArgs,
   DefaultContext,
-  ApolloCache<any>
+  ApolloCache<IMutation>
 > => {
   const mutation = useMutation<
-    Pick<IMutation, "createBoard">,
-    IMutationCreateBoardArgs
-  >(CREATE_BOARD);
+    Pick<IMutation, "loginUser">,
+    IMutationLoginUserArgs
+  >(LOG_IN);
 
   return mutation;
 };
