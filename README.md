@@ -2,9 +2,13 @@
 
 ## ✏️ 프로젝트 소개 
 
-리스트업, 페이지네이션, 무한스크롤, 글 작성, 수정 및 삭제 등 웹의 핵심이 되는 기능들로 채워진 **게시판**과
+리스트업, 페이지네이션, 무한스크롤, 글 작성, 수정 및 삭제 등
 
-로그인, 권한분기, 결제 등 추가적인 기능으로 게시판을 고도화한 **중고마켓**을 구현한 프로젝트입니다. 
+웹의 핵심이 되는 기능들로 채워진 **게시판**과
+
+로그인, 권한분기, 결제 등 추가적인 기능으로 
+
+게시판을 고도화한 **중고마켓**을 구현한 프로젝트입니다. 
 
 
 <br/>
@@ -82,8 +86,9 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
 <br/>
 
  ```JavaScript
+src\components\units\logIn\LogIn.index.tsx
+// 로그인
 
-// 로그인 \src\components\units\logIn\LogIn.index.tsx
 
 
 export default function LogIn(): JSX.Element {
@@ -92,6 +97,7 @@ export default function LogIn(): JSX.Element {
   const [loginUser] = useMutationLoginUser();
 
 // zustand를 활용한 globalstate 사용
+
   const setAccessToken = useAccessToken((state) => state.setToken);
   const setLoggedIn = useLogIn((state) => state.setIsLoggedIn);
 
@@ -120,6 +126,7 @@ export default function LogIn(): JSX.Element {
 
 // 권한분기
 
+
 import { useEffect } from "react";
 import { useAccessToken } from "../../../../commons/stores";
 
@@ -138,7 +145,11 @@ export const useAuth = (): void => {
   }, []);
 };
 
+
+
+
 // mypage에 적용
+pages\myPage\index.tsx
 
 export default function myPagePage(): JSX.Element {
 
