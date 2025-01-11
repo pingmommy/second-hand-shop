@@ -57,12 +57,15 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
   }, 500);
 
 ...
+
 }
+
+```
+
 
 <br/>
 
 
-```
 </details>
 
 
