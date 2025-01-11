@@ -86,15 +86,16 @@ export default function SearchBarWithBtn(props: ISearchProps): JSX.Element {
 <br/>
 
  ```JavaScript
-src\components\units\logIn\LogIn.index.tsx
-// 로그인
 
+// 로그인
 
 
 export default function LogIn(): JSX.Element {
   const router = useRouter();
 
   const [loginUser] = useMutationLoginUser();
+
+
 
 // zustand를 활용한 globalstate 사용
 
@@ -149,13 +150,14 @@ export const useAuth = (): void => {
 
 
 // mypage에 적용
-pages\myPage\index.tsx
+
 
 export default function myPagePage(): JSX.Element {
 
 ...
 
   useAuth();
+
   return ( ...  );
 }
 
